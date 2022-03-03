@@ -23,7 +23,7 @@ namespace BugTracker.Controllers
         // GET: Companies
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Company.ToListAsync());
+            return View(await _context.Companies.ToListAsync());
         }
 
         // GET: Companies/Details/5
@@ -34,7 +34,7 @@ namespace BugTracker.Controllers
                 return NotFound();
             }
 
-            var company = await _context.Company
+            var company = await _context.Companies
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (company == null)
             {
@@ -74,7 +74,7 @@ namespace BugTracker.Controllers
                 return NotFound();
             }
 
-            var company = await _context.Company.FindAsync(id);
+            var company = await _context.Companies.FindAsync(id);
             if (company == null)
             {
                 return NotFound();
@@ -125,7 +125,7 @@ namespace BugTracker.Controllers
                 return NotFound();
             }
 
-            var company = await _context.Company
+            var company = await _context.Companies
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (company == null)
             {
@@ -140,15 +140,15 @@ namespace BugTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var company = await _context.Company.FindAsync(id);
-            _context.Company.Remove(company);
+            var company = await _context.Companies.FindAsync(id);
+            _context.Companies.Remove(company);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CompanyExists(int id)
         {
-            return _context.Company.Any(e => e.Id == id);
+            return _context.Companies.Any(e => e.Id == id);
         }
     }
 }

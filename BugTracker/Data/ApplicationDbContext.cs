@@ -11,7 +11,7 @@ namespace BugTracker.Data
         {
         }
 
-        public DbSet<Company> Company { get; set; } = default!;
+        public DbSet<Company> Companies { get; set; } = default!;
         public DbSet<Invite> Invite { get; set; } = default!;
         public DbSet<Project> Projects { get; set; } = default!;
         public DbSet<Ticket> Tickets { get; set; } = default!;

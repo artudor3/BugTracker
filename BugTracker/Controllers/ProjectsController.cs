@@ -50,7 +50,7 @@ namespace BugTracker.Controllers
         // GET: Projects/Create
         public IActionResult Create()
         {
-            ViewData["CompanyId"] = new SelectList(_context.Company, "Id", "Name");
+            ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Name");
             ViewData["ProjectPriorityId"] = new SelectList(_context.ProjectPriorities, "Id", "Name");
             return View();
         }
@@ -68,7 +68,7 @@ namespace BugTracker.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CompanyId"] = new SelectList(_context.Company, "Id", "Name", project.CompanyId);
+            ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Name", project.CompanyId);
             ViewData["ProjectPriorityId"] = new SelectList(_context.ProjectPriorities, "Id", "Name", project.ProjectPriorityId);
             return View(project);
         }
@@ -86,7 +86,7 @@ namespace BugTracker.Controllers
             {
                 return NotFound();
             }
-            ViewData["CompanyId"] = new SelectList(_context.Company, "Id", "Name", project.CompanyId);
+            ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Name", project.CompanyId);
             ViewData["ProjectPriorityId"] = new SelectList(_context.ProjectPriorities, "Id", "Name", project.ProjectPriorityId);
             return View(project);
         }
@@ -123,7 +123,7 @@ namespace BugTracker.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CompanyId"] = new SelectList(_context.Company, "Id", "Name", project.CompanyId);
+            ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Name", project.CompanyId);
             ViewData["ProjectPriorityId"] = new SelectList(_context.ProjectPriorities, "Id", "Name", project.ProjectPriorityId);
             return View(project);
         }

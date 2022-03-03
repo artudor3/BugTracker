@@ -52,7 +52,7 @@ namespace BugTracker.Controllers
         // GET: Invites/Create
         public IActionResult Create()
         {
-            ViewData["CompanyId"] = new SelectList(_context.Company, "Id", "Name");
+            ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Name");
             ViewData["InviteeId"] = new SelectList(_context.Users, "Id", "Id");
             ViewData["InvitorId"] = new SelectList(_context.Users, "Id", "Id");
             ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Description");
@@ -72,7 +72,7 @@ namespace BugTracker.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CompanyId"] = new SelectList(_context.Company, "Id", "Name", invite.CompanyId);
+            ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Name", invite.CompanyId);
             ViewData["InviteeId"] = new SelectList(_context.Users, "Id", "Id", invite.InviteeId);
             ViewData["InvitorId"] = new SelectList(_context.Users, "Id", "Id", invite.InvitorId);
             ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Description", invite.ProjectId);
@@ -92,7 +92,7 @@ namespace BugTracker.Controllers
             {
                 return NotFound();
             }
-            ViewData["CompanyId"] = new SelectList(_context.Company, "Id", "Name", invite.CompanyId);
+            ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Name", invite.CompanyId);
             ViewData["InviteeId"] = new SelectList(_context.Users, "Id", "Id", invite.InviteeId);
             ViewData["InvitorId"] = new SelectList(_context.Users, "Id", "Id", invite.InvitorId);
             ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Description", invite.ProjectId);
@@ -131,7 +131,7 @@ namespace BugTracker.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CompanyId"] = new SelectList(_context.Company, "Id", "Name", invite.CompanyId);
+            ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Name", invite.CompanyId);
             ViewData["InviteeId"] = new SelectList(_context.Users, "Id", "Id", invite.InviteeId);
             ViewData["InvitorId"] = new SelectList(_context.Users, "Id", "Id", invite.InvitorId);
             ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Description", invite.ProjectId);
