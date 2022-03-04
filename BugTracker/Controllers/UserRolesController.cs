@@ -1,10 +1,14 @@
-﻿using BugTracker.Services.Interfaces;
+﻿using BugTracker.Extensions;
+using BugTracker.Models;
+using BugTracker.Models.ViewModels;
+using BugTracker.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BugTracker.Controllers
 {
-    [Authorize(IBTRolesService = "Admin")]
+    [Authorize(Roles="Admin")]
     public class UserRolesController : Controller
     {
         private readonly IBTRolesService _rolesService;
@@ -25,14 +29,45 @@ namespace BugTracker.Controllers
         [HttpGet]
         public async Task<IActionResult> ManageUserRoles()
         {
-            return View();
+            List<ManageUserRolesViewModel> model = new();
+            int companyId = User.Identity!.GetCompanyId();
+
+            List<BTUser> users = await _companyInfoService.GetAllMemebersAsync(companyId);
+            foreach (BTUser user in users)
+            {
+                ManageUserRolesViewModel viewModel = new();
+                viewModel.BTUser = user;
+                IEnumerable<string> selected = await _rolesService.GetUserRolesAsync(user);
+                viewModel.Roles = new MultiSelectList(await _rolesService.GetRolesAsync(),"Name","Name", selected);
+
+                model.Add(viewModel);
+                
+            }
+
+            return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ManageUserRoles(ManageUserRolesViewModel member)
         {
-            
+
+            int companyId = User.Identity!.GetCompanyId();
+            BTUser? btUser = (await _companyInfoService.GetAllMemebersAsync(companyId)).FirstOrDefault(u => u.Id == member.BTUser?.Id);
+
+            IEnumerable<string> roles = await _rolesService.GetUserRolesAsync(btUser!);
+
+            string userRole = member.SelectedRoles?.FirstOrDefault()!;
+
+            if(!string.IsNullOrEmpty(userRole))
+            {
+                if (await _rolesService.RemoveUserFromRolesAsync(btUser, roles))
+                {
+                    await _rolesService.AddUserToRoleAsync(btUser, userRole);
+                }
+            }
+
+            return RedirectToAction(nameof(ManageUserRoles));
         }
     }
 }
