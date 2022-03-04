@@ -14,7 +14,7 @@ namespace BugTracker.Models
         [DisplayName("Company Description")]
         public string? Description { get; set; }
 
-        public virtual ICollection<BTUser> Memebers { get; set; } = new HashSet<BTUser>();
+        public virtual ICollection<BTUser> Members { get; set; } = new HashSet<BTUser>();
         public virtual ICollection<Project> Projects { get; set; } = new HashSet<Project>();
         public virtual ICollection<Invite> Invites { get; set; } = new HashSet<Invite>();
     }

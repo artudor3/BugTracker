@@ -51,10 +51,10 @@ namespace BugTracker.Models
         public virtual TicketPriority? TicketPriority { get; set; }
         public virtual TicketStatus? TicketStatus { get; set; }
 
-        public virtual ICollection<TicketComment> TicketComments { get; set; } = new HashSet<TicketComment>();
-        public virtual ICollection<TicketAttachment> TicketAttachments { get; set;} = new HashSet<TicketAttachment>();
-        public virtual ICollection<TicketHistory> TicketHistory { get; set;} = new HashSet<TicketHistory>();
-        public virtual ICollection<Notification> Notification { get; set; } = new HashSet<Notification>();
+        public virtual ICollection<TicketComment> Comments { get; set; } = new HashSet<TicketComment>();
+        public virtual ICollection<TicketAttachment> Attachments { get; set;} = new HashSet<TicketAttachment>();
+        public virtual ICollection<TicketHistory> History { get; set;} = new HashSet<TicketHistory>();
+        public virtual ICollection<Notification> Notifications { get; set; } = new HashSet<Notification>();
 
 
     }

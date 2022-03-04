@@ -23,6 +23,21 @@
             @Html.DisplayFor(model => model.Description)
         </dd>
     </dl>
+    <h2>Members</h2>
+    @foreach (BTUser user in Model.Members)
+    {
+        <p>@user.FullName</p>
+    }
+    <h2>Projects</h2>
+    @foreach (Project proj in Model.Projects)
+    {
+        <p>@proj.Name</p>
+        <h4>Tickets</h4>
+        @foreach (Ticket ticket in proj.Tickets)
+        {
+            <p>@ticket.Title</p>
+        }
+    }
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |

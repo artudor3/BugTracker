@@ -8,16 +8,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BugTracker.Data;
 using BugTracker.Models;
+using BugTracker.Services.Interfaces;
 
 namespace BugTracker.Controllers
 {
     public class CompaniesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IBTCompanyInfoService _companyInfoService;
 
-        public CompaniesController(ApplicationDbContext context)
+        public CompaniesController(ApplicationDbContext context, IBTCompanyInfoService companyInfoService)
         {
             _context = context;
+            _companyInfoService = companyInfoService;
         }
 
         // GET: Companies
@@ -33,9 +36,15 @@ namespace BugTracker.Controllers
             {
                 return NotFound();
             }
+            //var tickets = await _companyInfoService.GetAllTicketsAsync(id);
+            //Company company = new();
+            //List<Project> projects = new();
+            //Project project1 = new();
+            //project1.Tickets = tickets;
+            //projects.Add(project1);
+            //company.Projects = projects;
+            var company = await _companyInfoService.GetCompanyInfoByIdAsync(id);
 
-            var company = await _context.Companies
-                .FirstOrDefaultAsync(m => m.Id == id);
             if (company == null)
             {
                 return NotFound();
