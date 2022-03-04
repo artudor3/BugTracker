@@ -1,13 +1,31 @@
-﻿using BugTracker.Models;
+﻿using BugTracker.Data;
+using BugTracker.Models;
 using BugTracker.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace BugTracker.Services
 {
     public class BTProjectService : IBTProjectService
     {
-        public Task AddNewProjectAsync(Project project)
+        private readonly ApplicationDbContext _context;
+
+        public BTProjectService(ApplicationDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+
+        //CRUD - CREATE
+        public async Task AddNewProjectAsync(Project project)
+        {
+            try
+            {
+                _context.Add(project);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public Task<bool> AddProjectManagerAsync(string userId, int projectId)
@@ -50,9 +68,22 @@ namespace BugTracker.Services
             throw new NotImplementedException();
         }
 
-        public Task<Project> GetProjectByIdAsync(int projectId, int companyId)
+        public async Task<Project> GetProjectByIdAsync(int projectId, int companyId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var project = await _context.Projects
+                .Include(p => p.Company)
+                .Include(p => p.ProjectPriority)
+                .FirstOrDefaultAsync(p => p.Id == projectId && p.CompanyId == companyId);
+
+                return project!;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public Task<BTUser> GetProjectManagerAsync(int projectId)
@@ -76,6 +107,11 @@ namespace BugTracker.Services
         }
 
         public Task<List<BTUser>> GetUsersNotOnProjectAsync(int projectId, int companyId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> IsAssignedProjectManagerAsync(string userId, int projectId)
         {
             throw new NotImplementedException();
         }
@@ -105,9 +141,16 @@ namespace BugTracker.Services
             throw new NotImplementedException();
         }
 
-        public Task UpdateProjectAsync(Project project)
+        public Task RestoreProjectAsync(Project project)
         {
             throw new NotImplementedException();
+        }
+
+        //CRUD - UPDATE
+        public async Task UpdateProjectAsync(Project project)
+        {
+            _context.Update(project);
+            await _context.SaveChangesAsync();
         }
     }
 }
