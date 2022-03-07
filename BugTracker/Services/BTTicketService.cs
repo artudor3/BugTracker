@@ -1,13 +1,25 @@
-﻿using BugTracker.Models;
+﻿using BugTracker.Data;
+using BugTracker.Models;
 using BugTracker.Services.Interfaces;
 
 namespace BugTracker.Services
 {
     public class BTTicketService : IBTTicketService
     {
-        public Task AddNewTicketAsync(Ticket ticket)
+        private readonly ApplicationDbContext _context;
+        private readonly IBTCompanyInfoService _companyInfoService;
+
+        public BTTicketService(ApplicationDbContext context, 
+                               IBTCompanyInfoService companyInfoService)
         {
-            throw new NotImplementedException();
+            _context = context;
+            _companyInfoService = companyInfoService;
+        }
+
+        public async Task AddNewTicketAsync(Ticket ticket)
+        {
+            _context.Add(ticket);
+            await _context.SaveChangesAsync();
         }
 
         public Task ArchiveTicketAsync(Ticket ticket)
@@ -20,9 +32,10 @@ namespace BugTracker.Services
             throw new NotImplementedException();
         }
 
-        public Task<List<Ticket>> GetAllTicketsByCompanyAsync(int companyId)
+        public async Task<List<Ticket>> GetAllTicketsByCompanyAsync(int companyId)
         {
-            throw new NotImplementedException();
+            List<Ticket> tickets = await _companyInfoService.GetAllTicketsAsync(companyId);
+            return tickets;
         }
 
         public Task<List<Ticket>> GetAllTicketsByPriorityAsync(int companyId, string priorityName)
@@ -100,9 +113,10 @@ namespace BugTracker.Services
             throw new NotImplementedException();
         }
 
-        public Task UpdateTicketAsync(Ticket ticket)
+        public async Task UpdateTicketAsync(Ticket ticket)
         {
-            throw new NotImplementedException();
+            _context.Update(ticket);
+            await _context.SaveChangesAsync();
         }
     }
 }

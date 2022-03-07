@@ -8,10 +8,13 @@ namespace BugTracker.Services
     public class BTProjectService : IBTProjectService
     {
         private readonly ApplicationDbContext _context;
+        private readonly IBTCompanyInfoService _companyInfoService;
 
-        public BTProjectService(ApplicationDbContext context)
+        public BTProjectService(ApplicationDbContext context, 
+                                IBTCompanyInfoService companyInfoService)
         {
             _context = context;
+            _companyInfoService = companyInfoService;
         }
 
         //CRUD - CREATE
@@ -48,9 +51,10 @@ namespace BugTracker.Services
             throw new NotImplementedException();
         }
 
-        public Task<List<Project>> GetAllProjectsByCompany(int companyId)
+        public async Task<List<Project>> GetAllProjectsByCompany(int companyId)
         {
-            throw new NotImplementedException();
+            List<Project> projects = await _companyInfoService.GetAllProjectsAsync(companyId);
+            return projects;
         }
 
         public Task<List<Project>> GetAllProjectsByPriority(int companyId, string priorityName)

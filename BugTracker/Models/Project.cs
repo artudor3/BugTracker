@@ -12,7 +12,7 @@ namespace BugTracker.Models
 
         [Required]
         [StringLength(240, ErrorMessage = "The {0} must be at most {1} and at least {2} characters long", MinimumLength = 2)]
-        [DisplayName("Company Name")]
+        [DisplayName("Project Name")]
         public string? Name { get; set; }
 
         [Required]

@@ -32,8 +32,11 @@ namespace BugTracker.Controllers
         // GET: Projects
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Projects.Include(p => p.Company).Include(p => p.ProjectPriority);
-            return View(await applicationDbContext.ToListAsync());
+            int companyId = User.Identity.GetCompanyId();
+            List<Project> projects = await _projectService.GetAllProjectsByCompany(companyId);
+            return View(projects);
+            //var applicationDbContext = _context.Projects.Include(p => p.Company).Include(p => p.ProjectPriority);
+            //return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Projects/Details/5
@@ -70,10 +73,11 @@ namespace BugTracker.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CompanyId,Name,Description,CreatedDate,StartDate,EndDate,ProjectPriorityId,ImageFileName,ImageFileData,ImageContentType,Archived")] Project project)
+        public async Task<IActionResult> Create([Bind("Name,Description,StartDate,EndDate,ProjectPriorityId,ImageFileName,ImageFileData,ImageContentType")] Project project)
         {
             if (ModelState.IsValid)
             {
+                project.CreatedDate = DateTimeOffset.Now;
                 await _projectService.AddNewProjectAsync(project);
                 return RedirectToAction(nameof(Index));
             }
