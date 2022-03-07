@@ -22,7 +22,7 @@ namespace BugTracker.Models
 
         [Required]
         [DisplayName("Created Date")]
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         public DateTimeOffset CreatedDate { get; set; }
 
         [DisplayName("Project Start Date")]

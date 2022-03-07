@@ -11,6 +11,9 @@ using BugTracker.Models;
 using BugTracker.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using BugTracker.Extensions;
+using Microsoft.AspNetCore.Authorization;
+using BugTracker.Models.ViewModels;
+using BugTracker.Models.Enums;
 
 namespace BugTracker.Controllers
 {
@@ -19,21 +22,27 @@ namespace BugTracker.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IBTProjectService _projectService;
         private readonly UserManager<BTUser> _userManager;
+        private readonly IBTRolesService _rolesService;
+        private readonly IBTLookupService _lookupsService;
 
         public ProjectsController(ApplicationDbContext context,
-                                  IBTProjectService projectService, 
-                                  UserManager<BTUser> userManager)
+                                  IBTProjectService projectService,
+                                  UserManager<BTUser> userManager,
+                                  IBTRolesService rolesService, 
+                                  IBTLookupService lookupsService)
         {
             _context = context;
             _projectService = projectService;
             _userManager = userManager;
+            _rolesService = rolesService;
+            _lookupsService = lookupsService;
         }
 
         // GET: Projects
         public async Task<IActionResult> Index()
         {
             int companyId = User.Identity.GetCompanyId();
-            List<Project> projects = await _projectService.GetAllProjectsByCompany(companyId);
+            List<Project> projects = await _projectService.GetAllProjectsByCompanyAsync(companyId);
             return View(projects);
             //var applicationDbContext = _context.Projects.Include(p => p.Company).Include(p => p.ProjectPriority);
             //return View(await applicationDbContext.ToListAsync());
@@ -60,11 +69,15 @@ namespace BugTracker.Controllers
             return View(project);
         }
 
+        [Authorize (Roles = "Admin, ProjectManager")]
         // GET: Projects/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Name");
-            ViewData["ProjectPriorityId"] = new SelectList(_context.ProjectPriorities, "Id", "Name");
+            int companyId = User.Identity.GetCompanyId();
+
+            AddProjectWithPMViewModel model = new();
+            model.PMList = new SelectList(await _rolesService.GetUsersInRoleAsync(nameof(BTRole.ProjectManager), companyId),"Id","FullName");            
+            model.PriorityList = new SelectList(await _lookupsService.GetProjectPrioritiesAsync(), "Id", "Name");
             return View();
         }
 
@@ -73,11 +86,12 @@ namespace BugTracker.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Description,StartDate,EndDate,ProjectPriorityId,ImageFileName,ImageFileData,ImageContentType")] Project project)
+        //,StartDate,EndDate
+        public async Task<IActionResult> Create([Bind("Name,Description,ProjectPriorityId,ImageFileName,ImageFileData,ImageContentType")] Project project)
         {
             if (ModelState.IsValid)
-            {
-                project.CreatedDate = DateTimeOffset.Now;
+            {   
+                //project.CreatedDate = DateTimeOffset.UtcNow;
                 await _projectService.AddNewProjectAsync(project);
                 return RedirectToAction(nameof(Index));
             }

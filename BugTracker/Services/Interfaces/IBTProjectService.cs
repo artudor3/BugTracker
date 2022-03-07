@@ -12,9 +12,9 @@ namespace BugTracker.Services.Interfaces
 
         public Task ArchiveProjectAsync(Project project);
 
-        public Task<List<Project>> GetAllProjectsByCompany(int companyId);
+        public Task<List<Project>> GetAllProjectsByCompanyAsync(int companyId);
 
-        public Task<List<Project>> GetAllProjectsByPriority(int companyId, string priorityName);
+        public Task<List<Project>> GetAllProjectsByPriorityAsync(int companyId, string priorityName);
 
         public Task<List<BTUser>> GetAllProjectMembersExceptPMAsync(int projectId);
 
@@ -29,6 +29,8 @@ namespace BugTracker.Services.Interfaces
         public Task<Project> GetProjectByIdAsync(int projectId, int companyId);
 
         public Task<List<BTUser>> GetSubmittersOnProjectAsync(int projectId);
+
+        public Task<List<Project>> GetUnassignedProjectsAsync(int companyId);
 
         public Task<List<BTUser>> GetUsersNotOnProjectAsync(int projectId, int companyId);
 
