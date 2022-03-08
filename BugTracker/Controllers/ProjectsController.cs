@@ -48,6 +48,38 @@ namespace BugTracker.Controllers
             //return View(await applicationDbContext.ToListAsync());
         }
 
+        //GET: Projects by User
+        public async Task<IActionResult> MyProjects()
+        {
+            string userId = _userManager.GetUserId(User);
+            List<Project> projects = await _projectService.GetUserProjectsAsync(userId);
+            return View(projects);
+        }
+
+        //GET: All Projects
+        public async Task<IActionResult> AllProjects()
+        {
+            int companyId = User.Identity.GetCompanyId();
+            List<Project> projects = await _projectService.GetAllProjectsByCompanyAsync(companyId);
+            return View(projects);
+        }
+
+        //GET: Archived
+        public async Task<IActionResult> ArchivedProjects()
+        {
+            int companyId = User.Identity.GetCompanyId();
+            List<Project> projects = await _projectService.GetArchivedProjectsByCompany(companyId);
+            return View(projects);
+        }
+        
+        //GET: Archived
+        public async Task<IActionResult> UnassignedProjects()
+        {
+            int companyId = User.Identity.GetCompanyId();
+            List<Project> projects = await _projectService.GetUnassignedProjectsAsync(companyId);
+            return View(projects);
+        }
+
         // GET: Projects/Details/5
         public async Task<IActionResult> Details(int? id)
         {
