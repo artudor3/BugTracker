@@ -10,6 +10,8 @@ using BugTracker.Data;
 using BugTracker.Models;
 using BugTracker.Services.Interfaces;
 using BugTracker.Extensions;
+using Microsoft.AspNetCore.Identity;
+using BugTracker.Models.Enums;
 
 namespace BugTracker.Controllers
 {
@@ -17,22 +19,73 @@ namespace BugTracker.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IBTTicketService _ticketService;
+        private readonly UserManager<BTUser> _userManager;
+        private readonly IBTCompanyInfoService _companyInfoService;
 
-        public TicketsController(ApplicationDbContext context, 
-                                 IBTTicketService ticketService)
+        public TicketsController(ApplicationDbContext context,
+                                 IBTTicketService ticketService,
+                                 UserManager<BTUser> userManager, 
+                                 IBTCompanyInfoService companyInfoService)
         {
             _context = context;
             _ticketService = ticketService;
+            _userManager = userManager;
+            _companyInfoService = companyInfoService;
         }
 
         // GET: Tickets
         public async Task<IActionResult> Index()
         {
-
             int companyId = User.Identity.GetCompanyId();
             List<Ticket> tickets = await _ticketService.GetAllTicketsByCompanyAsync(companyId);
             return View(tickets);
         }
+
+        //GET: Tickets by User
+        public async Task<IActionResult> MyTickets()
+        {
+            int companyId = User.Identity.GetCompanyId();
+            string userId = _userManager.GetUserId(User);
+            List<Ticket> tickets = await _ticketService.GetTicketsByUserIdAsync(userId, companyId);
+            return View(tickets);
+        }
+
+        //GET: All Tickets
+        public async Task<IActionResult> AllTickets()
+        {
+            List<Ticket> tickets = new();
+            int companyId = User.Identity.GetCompanyId();
+
+            if (User.IsInRole(nameof(BTRole.Admin)) || User.IsInRole(nameof(BTRole.ProjectManager)))
+            {
+                tickets = await _companyInfoService.GetAllTicketsAsync(companyId);
+            }
+            else
+            {
+
+                tickets = (await _ticketService.GetAllTicketsByCompanyAsync(companyId))
+                                                .Where(t => t.Archived == false).ToList();
+            }
+
+            return View(tickets);
+        }
+
+        //GET: Archived Tickets
+        public async Task<IActionResult> ArchivedTickets()
+        {
+            int companyId = User.Identity.GetCompanyId();
+            List<Ticket> tickets = await _ticketService.GetArchivedTicketsAsync(companyId);
+            return View(tickets);
+        }
+
+        //GET: Unassigned Tickets
+        public async Task<IActionResult> UnassignedTickets()
+        {
+            int companyId = User.Identity.GetCompanyId();
+            List<Ticket> tickets = await _ticketService.GetUnassignedTicketsAsync(companyId);
+            return View(tickets);
+        }
+
 
         // GET: Tickets/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -50,6 +103,7 @@ namespace BugTracker.Controllers
                 .Include(t => t.TicketStatus)
                 .Include(t => t.TicketType)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (ticket == null)
             {
                 return NotFound();
@@ -153,38 +207,25 @@ namespace BugTracker.Controllers
             return View(ticket);
         }
 
-        // GET: Tickets/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // POST: Tickets/Archive/5
+        [HttpPost, ActionName("Archive")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ArchiveTicket(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var ticket = await _context.Tickets
-                .Include(t => t.DeveloperUser)
-                .Include(t => t.OwnerUser)
-                .Include(t => t.Project)
-                .Include(t => t.TicketPriority)
-                .Include(t => t.TicketStatus)
-                .Include(t => t.TicketType)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (ticket == null)
-            {
-                return NotFound();
-            }
-
-            return View(ticket);
+            int companyId = User.Identity.GetCompanyId();
+            Ticket ticket = await _ticketService.GetTicketByIdAsync(id);
+            await _ticketService.ArchiveTicketAsync(ticket);
+            return RedirectToAction(nameof(Index));
         }
 
-        // POST: Tickets/Delete/5
-        [HttpPost, ActionName("Delete")]
+        // POST: Projects/Restore/5
+        [HttpPost, ActionName("Restore")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> RestoreTicket(int id)
         {
-            var ticket = await _context.Tickets.FindAsync(id);
-            _context.Tickets.Remove(ticket);
-            await _context.SaveChangesAsync();
+            int companyId = User.Identity.GetCompanyId();
+            Ticket ticket = await _ticketService.GetTicketByIdAsync(id);
+            await _ticketService.RestoreTicketAsync(ticket);
             return RedirectToAction(nameof(Index));
         }
 
