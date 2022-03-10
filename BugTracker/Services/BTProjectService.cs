@@ -148,7 +148,7 @@ namespace BugTracker.Services
             try
             {
                 //take out .Include(p => p.Company) later
-                projects = await _context.Projects.Where(p => p.CompanyId == companyId)
+                projects = await _context.Projects.Where(p => p.CompanyId == companyId && p.Archived == false)
                                                     .Include(p => p.Members)
                                                     .Include(p => p.Company)
                                                     .Include(p => p.Tickets)

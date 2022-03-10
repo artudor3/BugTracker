@@ -1,4 +1,4 @@
-﻿ #nullable disable
+﻿#nullable disable
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +24,7 @@ namespace BugTracker.Controllers
 
         public TicketsController(ApplicationDbContext context,
                                  IBTTicketService ticketService,
-                                 UserManager<BTUser> userManager, 
+                                 UserManager<BTUser> userManager,
                                  IBTCompanyInfoService companyInfoService)
         {
             _context = context;
@@ -207,15 +207,47 @@ namespace BugTracker.Controllers
             return View(ticket);
         }
 
+        // GET: Tickets/Archive/5
+        public async Task<IActionResult> Archive(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var ticket = await _ticketService.GetTicketByIdAsync(id.Value);
+            if (ticket == null)
+            {
+                return NotFound();
+            }
+            return View(ticket);
+        }
+
+
         // POST: Tickets/Archive/5
         [HttpPost, ActionName("Archive")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ArchiveTicket(int id)
         {
-            int companyId = User.Identity.GetCompanyId();
             Ticket ticket = await _ticketService.GetTicketByIdAsync(id);
             await _ticketService.ArchiveTicketAsync(ticket);
             return RedirectToAction(nameof(Index));
+        }
+
+        // GET: Tickets/Restore/5
+        public async Task<IActionResult> Restore(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var ticket = await _ticketService.GetTicketByIdAsync(id.Value);
+            if (ticket == null)
+            {
+                return NotFound();
+            }
+            return View(ticket);
         }
 
         // POST: Projects/Restore/5
@@ -223,7 +255,6 @@ namespace BugTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RestoreTicket(int id)
         {
-            int companyId = User.Identity.GetCompanyId();
             Ticket ticket = await _ticketService.GetTicketByIdAsync(id);
             await _ticketService.RestoreTicketAsync(ticket);
             return RedirectToAction(nameof(Index));

@@ -91,9 +91,9 @@
                 @Html.DisplayFor(modelItem => item.TicketStatus.Name)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Restore" asp-route-id="@item.Id">Restore</a>
+                <a class="btn btn-sm btn-outline-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a class="btn btn-sm btn-outline-dark" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a class="btn btn-sm btn-outline-success" asp-action="Restore" asp-route-id="@item.Id">Restore</a>
             </td>
         </tr>
 }
