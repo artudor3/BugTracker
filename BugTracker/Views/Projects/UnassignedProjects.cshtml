@@ -1,4 +1,7 @@
 ﻿@model IEnumerable<BugTracker.Models.Project>
+@using BugTracker.Services.Interfaces
+
+@inject IBTProjectService ProjectService;
 
 @{
     ViewData["Title"] = "Unassigned Projects";
@@ -31,10 +34,10 @@
                 @Html.DisplayNameFor(model => model.Archived)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Company)
+                @Html.DisplayNameFor(model => model.ProjectPriority)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProjectPriority)
+                Project Manager
             </th>
             <th></th>
         </tr>
@@ -72,16 +75,16 @@
                     @Html.DisplayFor(modelItem => item.Archived)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Company.Name)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.ProjectPriority.Name)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a class="btn btn-sm btn-outline-info" asp-action="AssignPM" asp-route-projectId="@item.Id">Assign PM</a> |
-                    <a asp-action="Archive" asp-route-id="@item.Id">Archive</a>
+                    @((await ProjectService.GetProjectManagerAsync(item.Id))?.FullName)
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-outline-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn btn-sm btn-outline-dark" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    <a class="btn btn-sm btn-outline-info" asp-action="AssignPM" asp-route-projectId="@item.Id">Assign PM</a>
+                    <a class="btn btn-sm btn-outline-danger" asp-action="Archive" asp-route-id="@item.Id">Archive</a>
                 </td>
             </tr>
         }

@@ -1,14 +1,11 @@
 ﻿@model IEnumerable<BugTracker.Models.Ticket>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Archived Tickets";
 }
 
-<h1>Index</h1>
+<h1>Archived Tickets</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -34,10 +31,10 @@
                 @Html.DisplayNameFor(model => model.Project)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OwnerUser)
+                Submitted By
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DeveloperUser)
+                Assigned Developer
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.TicketType)
@@ -73,13 +70,13 @@
                 @Html.DisplayFor(modelItem => item.ArchivedByProject)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Project.Description)
+                @Html.DisplayFor(modelItem => item.Project.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.OwnerUser.Id)
+                @Html.DisplayFor(modelItem => item.OwnerUser.FullName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DeveloperUser.Id)
+                @Html.DisplayFor(modelItem => item.DeveloperUser.FullName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TicketType.Name)
@@ -91,7 +88,6 @@
                 @Html.DisplayFor(modelItem => item.TicketStatus.Name)
             </td>
             <td>
-                <a class="btn btn-sm btn-outline-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a class="btn btn-sm btn-outline-dark" asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a class="btn btn-sm btn-outline-success" asp-action="Restore" asp-route-id="@item.Id">Restore</a>
             </td>

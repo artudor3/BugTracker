@@ -30,7 +30,7 @@ namespace BugTracker.Controllers
         public async Task<IActionResult> ManageUserRoles()
         {
             List<ManageUserRolesViewModel> model = new();
-            int companyId = User.Identity!.GetCompanyId();
+            int companyId = User.Identity!.GetCompanyId(User);
 
             List<BTUser> users = await _companyInfoService.GetAllMemebersAsync(companyId);
             foreach (BTUser user in users)
@@ -52,7 +52,7 @@ namespace BugTracker.Controllers
         public async Task<IActionResult> ManageUserRoles(ManageUserRolesViewModel member)
         {
 
-            int companyId = User.Identity!.GetCompanyId();
+            int companyId = User.Identity!.GetCompanyId(User);
             BTUser? btUser = (await _companyInfoService.GetAllMemebersAsync(companyId)).FirstOrDefault(u => u.Id == member.BTUser?.Id);
 
             IEnumerable<string> roles = await _rolesService.GetUserRolesAsync(btUser!);

@@ -38,10 +38,10 @@
                 @Html.DisplayNameFor(model => model.Archived)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Company)
+                @Html.DisplayNameFor(model => model.ProjectPriority)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProjectPriority)
+                Project Manager
             </th>
             <th></th>
         </tr>
@@ -79,10 +79,10 @@
                     @Html.DisplayFor(modelItem => item.Archived)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Company.Name)
+                    @Html.DisplayFor(modelItem => item.ProjectPriority.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ProjectPriority.Name)
+                    @((await ProjectService.GetProjectManagerAsync(item.Id))?.FullName)
                 </td>
                 <td>
                     <a class="btn btn-sm btn-outline-dark" asp-action="Details" asp-route-id="@item.Id">Details</a>

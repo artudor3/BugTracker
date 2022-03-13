@@ -5,7 +5,7 @@ namespace BugTracker.Extensions
 {
     public static class IdentityExtensions
     {
-        public static int GetCompanyId(this IIdentity identity)
+        public static int GetCompanyId(this IIdentity identity, ClaimsPrincipal user)
         {
             Claim claim = ((ClaimsIdentity)identity).FindFirst("CompanyId")!;
             
