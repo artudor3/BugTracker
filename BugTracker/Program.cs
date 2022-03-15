@@ -31,9 +31,12 @@ builder.Services.AddScoped<IBTRolesService, BTRolesService>();
 builder.Services.AddScoped<IBTTicketService, BTTicketService>();
 builder.Services.AddScoped<IBTLookupService, BTLookupService>();
 builder.Services.AddScoped<IBTFileService, BTFileService>();
-builder.Services.AddScoped<IBTNotificationService, BTNotificationService>(); 
+builder.Services.AddScoped<IBTNotificationService, BTNotificationService>();
+builder.Services.AddScoped<IEmailSender, BTEmailService>();
 builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 builder.Services.AddScoped<IBTTicketHistoryService, BTTicketHistoryService>();
+builder.Services.AddScoped<IBTInviteService, BTInviteService>();
+
 
 builder.Services.AddMvc();
 

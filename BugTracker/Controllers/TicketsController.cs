@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using BugTracker.Data;
 using BugTracker.Models;
 using BugTracker.Services.Interfaces;
 using BugTracker.Extensions;
@@ -19,7 +18,6 @@ namespace BugTracker.Controllers
 {
     public class TicketsController : Controller
     {
-        private readonly ApplicationDbContext _context;
         private readonly UserManager<BTUser> _userManager;
         private readonly IBTCompanyInfoService _companyInfoService;
         private readonly IBTTicketService _ticketService;
@@ -29,8 +27,7 @@ namespace BugTracker.Controllers
         private readonly IBTFileService _fileService;
         private readonly IBTTicketHistoryService _ticketHistoryService;
 
-        public TicketsController(ApplicationDbContext context,
-                                 UserManager<BTUser> userManager,
+        public TicketsController(UserManager<BTUser> userManager,
                                  IBTCompanyInfoService companyInfoService,
                                  IBTTicketService ticketService,
                                  IBTProjectService projectService,
@@ -39,7 +36,6 @@ namespace BugTracker.Controllers
                                  IBTFileService fileService,
                                  IBTTicketHistoryService ticketHistoryService)
         {
-            _context = context;
             _userManager = userManager;
             _companyInfoService = companyInfoService;
             _ticketService = ticketService;
@@ -53,7 +49,7 @@ namespace BugTracker.Controllers
         //GET: Tickets by User
         public async Task<IActionResult> MyTickets()
         {
-            int companyId = User.Identity.GetCompanyId(User);
+            int companyId = User.Identity.GetCompanyId();
             string userId = _userManager.GetUserId(User);
             List<Ticket> tickets = await _ticketService.GetTicketsByUserIdAsync(userId, companyId);
             return View(tickets);
@@ -63,7 +59,7 @@ namespace BugTracker.Controllers
         public async Task<IActionResult> AllTickets()
         {
             List<Ticket> tickets = new();
-            int companyId = User.Identity.GetCompanyId(User);
+            int companyId = User.Identity.GetCompanyId();
 
             if (User.IsInRole(nameof(BTRole.Admin)) || User.IsInRole(nameof(BTRole.ProjectManager)))
             {
@@ -82,7 +78,7 @@ namespace BugTracker.Controllers
         //GET: Archived Tickets
         public async Task<IActionResult> ArchivedTickets()
         {
-            int companyId = User.Identity.GetCompanyId(User);
+            int companyId = User.Identity.GetCompanyId();
             List<Ticket> tickets = await _ticketService.GetArchivedTicketsAsync(companyId);
             return View(tickets);
         }
@@ -91,7 +87,7 @@ namespace BugTracker.Controllers
         [Authorize(Roles = "Admin, ProjectManager")]
         public async Task<IActionResult> UnassignedTickets()
         {
-            int companyId = User.Identity.GetCompanyId(User);
+            int companyId = User.Identity.GetCompanyId();
             List<Ticket> tickets = await _ticketService.GetUnassignedTicketsAsync(companyId);
             return View(tickets);
         }
@@ -106,7 +102,7 @@ namespace BugTracker.Controllers
                 return NotFound();
             }
 
-            int companyId = User.Identity.GetCompanyId(User);
+            int companyId = User.Identity.GetCompanyId();
             AssignDevViewModel model = new();
 
             model.Ticket = await _ticketService.GetTicketByIdAsync(ticketId.Value);
@@ -158,7 +154,7 @@ namespace BugTracker.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddTicketComment([Bind("Id,TicketId,Comment")] TicketComment comment)
+        public async Task<IActionResult> AddTicketComment([Bind("Id,TicketId,CommentBody")] TicketComment comment)
         {
             ModelState.Remove("UserId");
             if (ModelState.IsValid)
@@ -202,14 +198,7 @@ namespace BugTracker.Controllers
                 return NotFound();
             }
 
-            Ticket ticket = await _context.Tickets
-                .Include(t => t.DeveloperUser)
-                .Include(t => t.OwnerUser)
-                .Include(t => t.Project)
-                .Include(t => t.TicketPriority)
-                .Include(t => t.TicketStatus)
-                .Include(t => t.TicketType)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            Ticket ticket = await _ticketService.GetTicketByIdAsync(id.Value);
 
             if (ticket == null)
             {
@@ -322,7 +311,7 @@ namespace BugTracker.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TicketExists(ticket.Id))
+                    if (!await TicketExists(ticket.Id))
                     {
                         return NotFound();
                     }
@@ -395,9 +384,10 @@ namespace BugTracker.Controllers
             return RedirectToAction(nameof(AllTickets));
         }
 
-        private bool TicketExists(int id)
+        private async Task<bool> TicketExists(int id)
         {
-            return _context.Tickets.Any(e => e.Id == id);
+            int companyId = User.Identity.GetCompanyId();
+            return (await _ticketService.GetAllTicketsByCompanyAsync(companyId)).Any(t => t.Id == id);
         }
     }
 }

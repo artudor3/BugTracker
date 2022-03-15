@@ -4,6 +4,7 @@
 @using Microsoft.AspNetCore.Identity
 
 @inject IBTProjectService ProjectService
+@inject IBTTicketHistoryService HistoryService
 @inject UserManager<BTUser> UserManager
 
 @{
@@ -44,7 +45,7 @@
                         <div class="body">
                             <ul class=" list-unstyled basic-list">
                                 <li>Start Date: <span class="">@Model.StartDate.ToString("MMM dd, yyyy")</span></li>
-                                <li>Deadline: <span class="">@Model.EndDate</span></li>
+                                <li>Deadline: <span class="">@Model.EndDate.ToString("MMM dd, yyyy")</span></li>
                                 <li>Priority: <span class="">@Model.ProjectPriority?.Name</span></li>
                                 @if (today < end && today >= start)
                                 {
@@ -153,7 +154,19 @@
                         </div>
                         <div class="body" style="overflow-y:auto;height:300px;background-color:antiquewhite">
                             @* Project Activity loop *@
-                            [Project Activity  e.g. Ticket History]
+                            @foreach (TicketHistory history in await HistoryService.GetProjectTicketsHistoriesAsync(Model.Id, btUser.CompanyId))
+                            {
+                                <div class="">
+                                    <span class="date">@history.Modified.ToString("dd MMM yyyy")</span>
+                                    <h6>@history.Description</h6>
+                                    <span>By: <a href="" title="@history.User.FullName">@history.User.FullName</a></span>
+                                    <div class="">
+                                        <p>The ticket <b>@history.PropertyName</b>  was edited</p>
+                                        <p>@($"Previous {history.PropertyName}:  {history.OldValue}")</p>
+                                        <p>@($"Current {history.PropertyName}:  {history.NewValue}")</p>
+                                    </div>
+                                </div>
+                            }
                         </div>
 
                     </div>
@@ -214,13 +227,13 @@
                                                     }
                                                     @if (User.IsInRole("Admin") || (projectManager?.Id == btUser.Id))
                                                     {
-                                                        if(ticket.Archived || ticket.ArchivedByProject)
+                                                        if (ticket.Archived || ticket.ArchivedByProject)
                                                         {
-                                                            <a class="btn btn-sm btn-outline-success" asp-action="Restore" asp-controller="Tickets" asp-route-id="@ticket.Id"><i class="fs-5 bi-archive"></i></a>                                                
+                                                            <a class="btn btn-sm btn-outline-success" asp-action="Restore" asp-controller="Tickets" asp-route-id="@ticket.Id"><i class="fs-5 bi-archive"></i></a>
                                                         }
                                                         else
                                                         {
-                                                            <a class="btn btn-sm btn-outline-danger" asp-action="Archive" asp-controller="Tickets" asp-route-id="@ticket.Id"><i class="fs-5 bi-archive"></i></a>                                                           
+                                                            <a class="btn btn-sm btn-outline-danger" asp-action="Archive" asp-controller="Tickets" asp-route-id="@ticket.Id"><i class="fs-5 bi-archive"></i></a>
                                                         }
                                                     }
                                                 </td>

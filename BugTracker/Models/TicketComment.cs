@@ -10,7 +10,7 @@ namespace BugTracker.Models
         [Required]
         [StringLength(2000)]
         [DisplayName("Member Comment")]
-        public string? Comment { get; set; }
+        public string? CommentBody { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayName("Created")]
