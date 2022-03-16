@@ -261,6 +261,15 @@ namespace BugTracker.Controllers
                 return RedirectToAction(nameof(AllTickets));
             }
 
+            if (User.IsInRole(nameof(BTRole.Admin)))
+            {
+                ViewData["ProjectId"] = new SelectList(await _projectService.GetAllProjectsByCompanyAsync(btUser.CompanyId), "Id", "Name");
+            }
+            else
+            {
+                ViewData["ProjectId"] = new SelectList(await _projectService.GetUserProjectsAsync(btUser.Id), "Id", "Name");
+            }
+
             ViewData["TicketPriorityId"] = new SelectList(await _lookupsService.GetTicketPrioritiesAsync(), "Id", "Name");
             ViewData["TicketTypeId"] = new SelectList(await _lookupsService.GetTicketTypesAsync(), "Id", "Name");
             return View(ticket);

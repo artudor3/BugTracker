@@ -6,7 +6,7 @@ namespace BugTracker.Services.Interfaces
     {
         public Task<Company> GetCompanyInfoByIdAsync(int? companyId);
 
-        public Task<List<BTUser>> GetAllMemebersAsync(int? companyId);
+        public Task<List<BTUser>> GetAllMembersAsync(int? companyId);
 
         public Task<List<Project>> GetAllProjectsAsync(int? companyId);
 

@@ -32,7 +32,7 @@ namespace BugTracker.Controllers
             List<ManageUserRolesViewModel> model = new();
             int companyId = User.Identity!.GetCompanyId();
 
-            List<BTUser> users = await _companyInfoService.GetAllMemebersAsync(companyId);
+            List<BTUser> users = await _companyInfoService.GetAllMembersAsync(companyId);
             foreach (BTUser user in users)
             {
                 ManageUserRolesViewModel viewModel = new();
@@ -53,7 +53,7 @@ namespace BugTracker.Controllers
         {
 
             int companyId = User.Identity!.GetCompanyId();
-            BTUser? btUser = (await _companyInfoService.GetAllMemebersAsync(companyId)).FirstOrDefault(u => u.Id == member.BTUser?.Id);
+            BTUser? btUser = (await _companyInfoService.GetAllMembersAsync(companyId)).FirstOrDefault(u => u.Id == member.BTUser?.Id);
 
             IEnumerable<string> roles = await _rolesService.GetUserRolesAsync(btUser!);
 

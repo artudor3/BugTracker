@@ -34,7 +34,7 @@ namespace BugTracker.Services
             }
         }
 
-        public async Task<List<BTUser>> GetAllMemebersAsync(int? companyId)
+        public async Task<List<BTUser>> GetAllMembersAsync(int? companyId)
         {
             List<BTUser> members = new();
 
