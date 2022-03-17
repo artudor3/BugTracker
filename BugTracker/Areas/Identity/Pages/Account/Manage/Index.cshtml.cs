@@ -3,10 +3,13 @@
 #nullable disable
 
 using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using BugTracker.Models;
+using BugTracker.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -17,13 +20,16 @@ namespace BugTracker.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<BTUser> _userManager;
         private readonly SignInManager<BTUser> _signInManager;
+        private readonly IBTFileService _fileService;
 
         public IndexModel(
             UserManager<BTUser> userManager,
-            SignInManager<BTUser> signInManager)
+            SignInManager<BTUser> signInManager, 
+            IBTFileService fileService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _fileService = fileService;
         }
 
         /// <summary>
@@ -56,9 +62,36 @@ namespace BugTracker.Areas.Identity.Pages.Account.Manage
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
+
+            [Required]
+            [EmailAddress]
+            [Display(Name = "Email")]
+            public string Email { get; set; }
+
+            [Required]
+            [StringLength(25, ErrorMessage = "The {0} must be at least {2} and at most {1} characters long", MinimumLength = 2)]
+            [Display(Name = "First Name")]
+            public string FirstName { get; set; }
+
+            [Required]
+            [StringLength(25, ErrorMessage = "The {0} must be at least {2} and at most {1} characters long", MinimumLength = 2)]
+            [Display(Name = "Last Name")]
+            public string LastName { get; set; }
+
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            [NotMapped]
+            [DataType(DataType.Upload)]
+            public IFormFile AvatarFormFile { get; set; }
+
+            [DisplayName("Avatar")]
+            public string AvatarName { get; set; }
+            public byte[] AvatarData { get; set; }
+
+            [DisplayName("File Extension")]
+            public string AvatarContentType { get; set; }
         }
 
         private async Task LoadAsync(BTUser user)
@@ -109,6 +142,11 @@ namespace BugTracker.Areas.Identity.Pages.Account.Manage
                     StatusMessage = "Unexpected error when trying to set phone number.";
                     return RedirectToPage();
                 }
+            }
+
+            if(Input.AvatarFormFile != null)
+            {
+                user.AvatarData = await _fileService.ConvertFileToByteArrayAsync(Input.AvatarFormFile);
             }
 
             await _signInManager.RefreshSignInAsync(user);

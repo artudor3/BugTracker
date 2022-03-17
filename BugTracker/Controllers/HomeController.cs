@@ -28,10 +28,21 @@ namespace BugTracker.Controllers
             }
                 return View();
         }
+        public IActionResult Landing()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Dashboard", "Home");
+            }
+                return View();
+        }
 
         [Authorize]
-        public async Task<IActionResult> Dashboard()
+        public async Task<IActionResult> Dashboard(string swalMessage = null!)
         {
+            ViewData["SwalMessage"] = swalMessage;
+
+
             DashboardViewModel model = new();
             int companyId = User.Identity.GetCompanyId();
             model.Company = await _companyInfoService.GetCompanyInfoByIdAsync(companyId);
@@ -43,6 +54,18 @@ namespace BugTracker.Controllers
         }
         [Authorize]
         public async Task<IActionResult> Default()
+        {
+            DashboardViewModel model = new();
+            int companyId = User.Identity.GetCompanyId();
+            model.Company = await _companyInfoService.GetCompanyInfoByIdAsync(companyId);
+            model.Projects = await _companyInfoService.GetAllProjectsAsync(companyId);
+            model.Tickets = await _companyInfoService.GetAllTicketsAsync(companyId);
+            model.Members = await _companyInfoService.GetAllMembersAsync(companyId);
+
+            return View(model);
+        }
+        [Authorize]
+        public async Task<IActionResult> TestTemplateDashboard()
         {
             DashboardViewModel model = new();
             int companyId = User.Identity.GetCompanyId();

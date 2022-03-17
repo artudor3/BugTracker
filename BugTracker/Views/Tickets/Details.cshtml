@@ -195,7 +195,7 @@
                             @foreach (TicketHistory history in Model.History)
                             {
                                 <div class="">
-                                    <span class="date" style="font-weight:bold">@history.Modified.ToString("dd MMM yyyy")</span>
+                                    <span class="date" style="font-weight:bold">@history.Modified.ToString("dd MMM yyyy - HH:mm")</span>
                                     <h6>@history.Description</h6>
                                     <span>By: <a href="" title="@history.User!.FullName">@history.User.FullName</a></span>
                                     <div class="">

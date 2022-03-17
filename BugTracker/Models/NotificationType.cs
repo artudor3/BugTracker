@@ -8,7 +8,7 @@ namespace BugTracker.Models
         public int Id { get; set; }
 
         [Required]
-        [DisplayName("Notificatio Type")]
+        [DisplayName("Notification Type")]
         public string? Name { get; set; }
     }
 }

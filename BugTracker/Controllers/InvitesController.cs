@@ -126,7 +126,7 @@ namespace BugTracker.Controllers
 
                     await _inviteService.AddNewInviteAsync(invite);
 
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction("Dashboard", "Home", new { swalMessage = "Invite Sent!" });
                 }
                 catch (Exception)
                 {

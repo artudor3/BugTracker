@@ -90,7 +90,7 @@ namespace BugTracker.Services
                         await _context.AddAsync(history);
                     }
 
-                    if (oldTicket!.TicketStatus != newTicket!.TicketStatus)
+                    if (oldTicket!.TicketStatusId != newTicket!.TicketStatusId)
                     {
                         TicketHistory history = new()
                         {
