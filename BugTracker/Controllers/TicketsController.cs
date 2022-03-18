@@ -120,14 +120,20 @@ namespace BugTracker.Controllers
         public async Task<IActionResult> AssignDev(AssignDevViewModel model)
         {
             if (!string.IsNullOrEmpty(model.DevId))
-            {
-                Ticket oldTicket = model.Ticket;
-                await _ticketService.AssignTicketAsync(model.Ticket.Id, model.DevId);
+            {   
+                
+                //Copy the current ticket information before it changes
+                model.Ticket = await _ticketService.GetTicketByIdAsync(model.Ticket.Id);
+                Ticket oldTicket = await _ticketService.GetTicketAsNoTrackingAsync(model.Ticket.Id);
+
+                await _ticketService.AssignTicketAsync(model.Ticket.Id, model.DevId);                
                 BTUser btUser = await _userManager.GetUserAsync(User);
 
-                await _ticketHistoryService.AddHistoryAsync(oldTicket, model.Ticket, btUser.Id);
+                Ticket newTicket = await _ticketService.GetTicketAsNoTrackingAsync(model.Ticket.Id);
+                //Add change to Ticket History
+                await _ticketHistoryService.AddHistoryAsync(oldTicket, newTicket, btUser.Id);
 
-                // Assign Developer Notification
+                //Assign Developer Notification
                 if (model.Ticket.DeveloperUserId != null)
                 {
                     Notification devNotification = new()
@@ -143,6 +149,7 @@ namespace BugTracker.Controllers
                     await _notificationService.AddNotificationAsync(devNotification);
                     await _notificationService.SendEmailNotificationAsync(devNotification, "Ticket Updated");
                 }
+
                 return RedirectToAction(nameof(AllTickets));
             }
             return RedirectToAction(nameof(AssignDev), new { ticketId = model.Ticket.Id });
@@ -281,6 +288,7 @@ namespace BugTracker.Controllers
                     {
                         TicketId = ticket.Id,
                         Title = "New Ticket",
+                        NotificationTypeId = (await _lookupService.LookupNotificationTypeIdAsync(nameof(BTNotificationType.Ticket))).Value,
                         Message = $"New Ticket: {ticket.Title}, was created by {btUser.FullName}",
                         Created = DateTime.UtcNow,
                         SenderId = btUser.Id,

@@ -2,6 +2,7 @@
 using BugTracker.Models;
 using BugTracker.Models.Enums;
 using BugTracker.Services.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace BugTracker.Services
@@ -12,17 +13,23 @@ namespace BugTracker.Services
         private readonly ApplicationDbContext _context;
         private readonly IBTRolesService _rolesService;
         private readonly IBTProjectService _projectService;
+        private readonly UserManager<BTUser> _userManager;
+        private readonly IBTTicketHistoryService _ticketHistoryService;
 
         #endregion
 
         #region Constructor
         public BTTicketService(ApplicationDbContext context,
-                        IBTRolesService rolesService,
-                        IBTProjectService projectService)
+                                IBTRolesService rolesService,
+                                IBTProjectService projectService,
+                                IBTTicketHistoryService ticketHistoryService, 
+                                UserManager<BTUser> userManager)
         {
             _context = context;
             _rolesService = rolesService;
             _projectService = projectService;
+            _ticketHistoryService = ticketHistoryService;
+            _userManager = userManager;
         }
 
         #endregion
@@ -127,6 +134,7 @@ namespace BugTracker.Services
                     {
                         ticket.DeveloperUserId = userId;
                         // Revisit this code when assigning Tickets
+
                         ticket.TicketStatusId = (await LookupTicketStatusIdAsync("Development")).Value;
                         await _context.SaveChangesAsync();
                     }

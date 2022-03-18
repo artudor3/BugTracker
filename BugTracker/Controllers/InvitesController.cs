@@ -146,9 +146,11 @@ namespace BugTracker.Controllers
             {
                 return NotFound();
             }
+
             Guid companyToken = Guid.Parse(_protector.Unprotect(token));
             string inviteeEmail = _protector.Unprotect(email);
             int companyId = int.Parse(_protector.Unprotect(company));
+
             try
             {
                 Invite invite = await _inviteService.GetInviteAsync(companyToken, inviteeEmail, companyId);
