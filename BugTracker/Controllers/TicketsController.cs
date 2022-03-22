@@ -109,7 +109,7 @@ namespace BugTracker.Controllers
             AssignDevViewModel model = new();
 
             model.Ticket = await _ticketService.GetTicketByIdAsync(ticketId.Value);
-            model.DevelopersList = new SelectList(await _rolesService.GetUsersInRoleAsync(nameof(BTRole.Developer), companyId), "Id", "FullName");
+            model.DevelopersList = new SelectList(await _projectService.GetProjectMembersByRoleAsync(model.Ticket.ProjectId, nameof(BTRole.Developer)), "Id", "FullName");
 
             return View(model);
         }
@@ -173,6 +173,8 @@ namespace BugTracker.Controllers
 
                 await _ticketService.AddTicketAttachmentAsync(ticketAttachment);
                 statusMessage = "Success: New attachment added to Ticket.";
+
+                await _ticketHistoryService.AddHistoryAsync(ticketAttachment.TicketId, nameof(TicketComment), ticketAttachment.UserId);
             }
             else
             {

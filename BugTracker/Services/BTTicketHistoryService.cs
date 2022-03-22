@@ -126,7 +126,7 @@ namespace BugTracker.Services
                         {
                             TicketId = newTicket.Id,
                             PropertyName = "Developer",
-                            OldValue = oldTicket.DeveloperUser.FullName ?? "Not Assigned",
+                            OldValue = oldTicket.DeveloperUser?.FullName ?? "Not Assigned",
                             NewValue = newTicket.DeveloperUser.FullName,
                             Modified = DateTime.UtcNow,
                             UserId = userId,

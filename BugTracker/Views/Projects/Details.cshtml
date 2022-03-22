@@ -9,12 +9,13 @@
 
 @{
     ViewData["Title"] = "Details";
-}
-@{
+
+    //Progress Bar Variables
     var start = Model.StartDate.DateTime;
     var end = Model.EndDate.DateTime;
     var today = DateTime.Now;
     var percent = today >= end ? 100 : today < start ? 0 : Math.Round((today.Subtract(start)) / (end.Subtract(start)) * 100);
+
     BTUser projectManager = await ProjectService.GetProjectManagerAsync(Model.Id);
     BTUser btUser = await UserManager.GetUserAsync(User);
 
@@ -69,12 +70,13 @@
                             <hr />
                         </div>
                         <div class="body" style="overflow-y:auto;height:300px;">
+                            @* Display Project Manager if one is assigned *@
                             @if (projectManager != null)
                             {
                                 <div>
                                     @if (projectManager.AvatarData != null)
                                     {
-                                        <img class="rounded-circle" src="data:image/*;base64,@(Convert.ToBase64String(projectManager.AvatarData))" alt="">
+                                        <img class="rounded-circle" style="width:60px;height:60px;" src="data:image/*;base64,@(Convert.ToBase64String(projectManager.AvatarData))" alt="">
                                     }
                                     else
                                     {
@@ -99,7 +101,7 @@
                                         <h5 class="text-muted m-b-0">Not Assigned</h5>
                                         @if (User.IsInRole(nameof(BTRole.Admin)))
                                         {
-                                            <span><a asp-action="AssignPM" asp-controller="Projects" asp-route-ProjectId="@Model.Id" class="btn btn-xs btn-outline-info">Assign PM</a></span>
+                                            <span><a asp-action="AssignPM" asp-controller="Projects" asp-route-projectId="@Model.Id" class="btn btn-xs btn-outline-info">Assign PM</a></span>
                                         }
                                     </div>
                                 </div>
@@ -118,6 +120,7 @@
                         </div>
                         <div class="body" style="overflow-y:auto;height:300px;">
                             <ul class="right_chat list-unstyled mb-0">
+                                @* Display Assigned Team Members *@
                                 @foreach (BTUser member in await ProjectService.GetAllProjectMembersExceptPMAsync(Model.Id))
                                 {
                                     <li class="">
@@ -125,7 +128,7 @@
                                             <div class="media">
                                                 @if (member.AvatarData != null)
                                                 {
-                                                    <img class="" src="data:image/*;base64,@(Convert.ToBase64String(member.AvatarData))" alt="" />
+                                                    <img class="rounded-circle" style="width:30px;height:30px;" src="data:image/*;base64,@(Convert.ToBase64String(member.AvatarData))" alt="" />
                                                 }
                                                 else
                                                 {

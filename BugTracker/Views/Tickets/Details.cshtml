@@ -10,10 +10,13 @@
 
 @{
     ViewData["Title"] = "Details";
+
+    // Progress Bar Variables
     var start = Model.Project.StartDate.DateTime;
     var end = Model.Project.EndDate.DateTime;
     var today = DateTime.Now;
     var percent = today >= end ? 100 : today < start ? 0 : Math.Round((today.Subtract(start)) / (end.Subtract(start)) * 100);
+
     BTUser btUser = await UserManager.GetUserAsync(User);
     BTUser projectManager = await ProjectService.GetProjectManagerAsync(Model.ProjectId);
 
@@ -22,7 +25,7 @@
 <h1>Ticket Details</h1>
 
 <div>
-    <div classxfont-weighteighteightgetainer-fluid">
+    <div classfont-weighteighteightgetainer-fluid">
         <div class="row gy-2">
             <div class="col-md-12 col">
                 <div class="row col-cols-2 mt-5 bg-secondary">
@@ -101,7 +104,7 @@
                                                 <a href="javascript:void(0);">
                                                     @if (btUser?.AvatarData != null)
                                                     {
-                                                        <img class="media-object " src="data:image/*;base64,@(Convert.ToBase64String(btUser.AvatarData))" alt="">
+                                                        <img class="media-object " src="data:image/*;base64,@(Convert.ToBase64String(btUser.AvatarData))" alt="" style="width:30px;height:30px">
                                                     }
                                                     else
                                                     {

@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using BugTracker.Data;
 using BugTracker.Models;
 using BugTracker.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -21,15 +22,18 @@ namespace BugTracker.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<BTUser> _userManager;
         private readonly SignInManager<BTUser> _signInManager;
         private readonly IBTFileService _fileService;
+        private readonly ApplicationDbContext _context;
 
         public IndexModel(
             UserManager<BTUser> userManager,
-            SignInManager<BTUser> signInManager, 
-            IBTFileService fileService)
+            SignInManager<BTUser> signInManager,
+            IBTFileService fileService, 
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _fileService = fileService;
+            _context = context;
         }
 
         /// <summary>
@@ -98,12 +102,20 @@ namespace BugTracker.Areas.Identity.Pages.Account.Manage
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            var firstName = user.FirstName;
+            var lastName = user.LastName;
+            var email = user.Email;
+            var avatarPicture = user.AvatarData;
 
             Username = userName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                FirstName = firstName,
+                LastName = lastName,
+                AvatarData = avatarPicture,
+                Email = email
             };
         }
 
@@ -144,10 +156,18 @@ namespace BugTracker.Areas.Identity.Pages.Account.Manage
                 }
             }
 
+            user.FirstName = Input.FirstName;
+            user.LastName = Input.LastName;
+
             if(Input.AvatarFormFile != null)
             {
                 user.AvatarData = await _fileService.ConvertFileToByteArrayAsync(Input.AvatarFormFile);
+                user.AvatarContentType = Input.AvatarFormFile.ContentType;
             }
+            await _userManager.UpdateAsync(user);
+
+            //_context.Update(user);
+            //await _context.SaveChangesAsync();
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";

@@ -217,6 +217,7 @@
                                                 </div>
                                                 <span class="title">@notification.Sender.FullName</span>
                                                 <span class="message">@notification.Created.ToString("MM.dd.yyyy - hh:mm:ss")</span>
+
                                             </a>
                                         </li>
                                     }
@@ -241,10 +242,10 @@
                                 </ul>
 
                                 <hr />
-
+@*
                                 <div class="text-end">
                                     <a href="#" class="view-more">View All</a>
-                                </div>
+                                </div>*@
                             </div>
                         </div>
                     </li>
@@ -257,7 +258,7 @@
                         <figure class="profile-picture">
                             @if (btUser.AvatarData != null)
                             {
-                                <img src="/template/img/!logged-user.jpg" alt="@btUser.FullName" class="rounded-circle" data-lock-picture="/template/img/!logged-user.jpg" />
+                                <img alt="@btUser.FullName" class="rounded-circle" src="data:image/*;base64,@(Convert.ToBase64String(btUser.AvatarData))" />
                             }
                             else
                             {
