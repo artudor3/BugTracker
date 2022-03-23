@@ -36,6 +36,14 @@ namespace BugTracker.Controllers
             }
                 return View();
         }
+        public IActionResult LandingShort()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Dashboard", "Home");
+            }
+                return View();
+        }
 
         [Authorize]
         public async Task<IActionResult> Dashboard(string swalMessage = null!)

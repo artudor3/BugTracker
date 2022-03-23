@@ -105,7 +105,6 @@ namespace BugTracker.Controllers
                 return NotFound();
             }
 
-            int companyId = User.Identity.GetCompanyId();
             AssignDevViewModel model = new();
 
             model.Ticket = await _ticketService.GetTicketByIdAsync(ticketId.Value);
@@ -398,6 +397,9 @@ namespace BugTracker.Controllers
                     else
                     {
                         //Admin notification
+                        BTUser admin = (await _rolesService.GetUsersInRoleAsync(nameof(BTRole.Admin), companyId)).FirstOrDefault();
+
+                        notification.RecipientId = admin.Id;
                         await _notificationService.AddNotificationAsync(notification);
                         await _notificationService.SendEmailNotificationsByRoleAsync(notification, companyId, nameof(BTRole.Admin));
                     }
@@ -410,7 +412,7 @@ namespace BugTracker.Controllers
                             NotificationTypeId = (await _lookupService.LookupNotificationTypeIdAsync(nameof(BTNotificationType.Ticket))).Value,
                             Title = "Ticket Updated",
                             Message = $"Ticket: {ticket.Title}, was updated by {btUser.FullName}",
-                            Created = DateTimeOffset.Now,
+                            Created = DateTimeOffset.UtcNow,
                             SenderId = btUser.Id,
                             RecipientId = ticket.DeveloperUserId
                         };
