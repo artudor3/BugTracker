@@ -87,7 +87,7 @@
                 <span class="separator"></span>
 
                 <ul class="notifications">
-                    <li>
+                    @*<li>
                         <a href="#" class="dropdown-toggle notification-icon" data-bs-toggle="dropdown">
                             <i class="bx bx-list-ol"></i>
                             <span class="badge">3</span>
@@ -133,8 +133,8 @@
                                 </ul>
                             </div>
                         </div>
-                    </li>
-                    <li>
+                    </li>*@
+                    @*<li>
                         <a href="#" class="dropdown-toggle notification-icon" data-bs-toggle="dropdown">
                             <i class="bx bx-envelope"></i>
                             <span class="badge">4</span>
@@ -189,11 +189,12 @@
                                 <hr />
 
                                 <div class="text-end">
-                                    <a asp-action="Index" asp-controller="Notifications" class="view-more">View All</a>
+                                    <a href="#" class="view-more">View All</a>
                                 </div>
+
                             </div>
                         </div>
-                    </li>
+                    </li>*@
                     <li>
                         <a href="#" class="dropdown-toggle notification-icon" data-bs-toggle="dropdown">
                             <i class="bx bx-bell"></i>
@@ -242,10 +243,9 @@
                                 </ul>
 
                                 <hr />
-@*
                                 <div class="text-end">
-                                    <a href="#" class="view-more">View All</a>
-                                </div>*@
+                                    <a asp-action="Index" asp-controller="Notifications" class="view-more">View All</a>
+                                </div>
                             </div>
                         </div>
                     </li>
