@@ -303,6 +303,9 @@ namespace BugTracker.Controllers
                     else
                     {
                         //Admin notification
+                        BTUser admin = (await _rolesService.GetUsersInRoleAsync(nameof(BTRole.Admin), companyId)).FirstOrDefault();
+
+                        notification.RecipientId = admin.Id;
                         await _notificationService.AddNotificationAsync(notification);
                         await _notificationService.SendEmailNotificationsByRoleAsync(notification, companyId, nameof(BTRole.Admin));
                     }

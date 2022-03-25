@@ -158,6 +158,7 @@ namespace BugTracker.Areas.Identity.Pages.Account.Manage
 
             user.FirstName = Input.FirstName;
             user.LastName = Input.LastName;
+            user.Email = Input.Email;
 
             if(Input.AvatarFormFile != null)
             {
