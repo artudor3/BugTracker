@@ -239,7 +239,7 @@ namespace BugTracker.Controllers
 
             model.PMList = new SelectList(await _rolesService.GetUsersInRoleAsync(nameof(BTRole.ProjectManager), companyId), "Id", "FullName");
             model.PriorityList = new SelectList(await _lookupsService.GetProjectPrioritiesAsync(), "Id", "Name");
-            return View(model.Project);
+            return View(model);
         }
 
         // GET: Projects/Edit/5
