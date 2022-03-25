@@ -30,10 +30,10 @@ namespace BugTracker.Controllers
         }
         public IActionResult Landing()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Dashboard", "Home");
-            }
+            //if (User.Identity.IsAuthenticated)
+            //{
+            //    return RedirectToAction("Dashboard", "Home");
+            //}
                 return View();
         }
         public IActionResult LandingShort()
