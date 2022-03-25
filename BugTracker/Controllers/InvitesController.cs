@@ -130,7 +130,7 @@ namespace BugTracker.Controllers
                 }
                 catch (Exception)
                 {
-
+                    return RedirectToAction("Dashboard", "Home", new { swalMessage = "Error: Error sending invite!" });
                     throw;
                 }
             }

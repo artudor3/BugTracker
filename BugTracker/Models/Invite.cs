@@ -33,6 +33,7 @@ namespace BugTracker.Models
 
         [Required]
         [DisplayName("Invitee Email")]
+        [DataType(DataType.EmailAddress)]
         public string? InviteeEmail { get; set; }
 
         [Required]

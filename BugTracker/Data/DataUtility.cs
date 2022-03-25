@@ -255,7 +255,7 @@ namespace BugTracker.Data
             }
 
 
-            //Seed Default Developer1 User
+            //Seed Default Developer0 User
             defaultUser = new BTUser
             {
                 UserName = "artudor3@gmail.com",
