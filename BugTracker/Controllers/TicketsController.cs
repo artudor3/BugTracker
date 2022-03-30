@@ -284,7 +284,7 @@ namespace BugTracker.Controllers
 
                     //: Ticket Create Notification
                     BTUser projectManager = await _projectService.GetProjectManagerAsync(ticket.ProjectId);
-                    int companyId = User.Identity!.GetCompanyId()!;
+                    int companyId = btUser.CompanyId;
                     Notification notification = new()
                     {
                         TicketId = ticket.Id,
