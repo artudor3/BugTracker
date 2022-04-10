@@ -1,802 +1,628 @@
 ﻿
+<!-- Main Content-->
+			<div class="main-content side-content pt-0">
 
-@{
-	Layout = "_newLayout";
-}
+				<div class="container-fluid">
+					<div class="inner-body">
 
-<header class="page-header">
-						<h2>Default Layout</h2>
-
-						<div class="right-wrapper text-end">
-							<ol class="breadcrumbs">
-								<li>
-									<a href="index.html">
-										<i class="bx bx-home-alt"></i>
-									</a>
-								</li>
-
-								<li><span>Layouts</span></li>
-
-								<li><span>Default</span></li>
-
-							</ol>
-
-							<a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fas fa-chevron-left"></i></a>
-						</div>
-					</header>
-
-					<!-- start: page -->
-					<div class="row">
-						<div class="col-lg-6 mb-3">
-							<section class="card">
-								<div class="card-body">
-									<div class="row">
-										<div class="col-xl-8">
-											<div class="chart-data-selector" id="salesSelectorWrapper">
-												<h2>
-													Sales:
-													<strong>
-														<select class="form-control" id="salesSelector">
-															<option value="Porto Admin" selected>Porto Admin</option>
-															<option value="Porto Drupal" >Porto Drupal</option>
-															<option value="Porto Wordpress" >Porto Wordpress</option>
-														</select>
-													</strong>
-												</h2>
-
-												<div id="salesSelectorItems" class="chart-data-selector-items mt-3">
-													<!-- Flot: Sales Porto Admin -->
-													<div class="chart chart-sm" data-sales-rel="Porto Admin" id="flotDashSales1" class="chart-active" style="height: 203px;"></div>
-													<script>
-
-														var flotDashSales1Data = [{
-														    data: [
-														        ["Jan", 140],
-														        ["Feb", 240],
-														        ["Mar", 190],
-														        ["Apr", 140],
-														        ["May", 180],
-														        ["Jun", 320],
-														        ["Jul", 270],
-														        ["Aug", 180]
-														    ],
-														    color: "#0088cc"
-														}];
-
-														// See: js/examples/examples.dashboard.js for more settings.
-
-													</script>
-
-													<!-- Flot: Sales Porto Drupal -->
-													<div class="chart chart-sm" data-sales-rel="Porto Drupal" id="flotDashSales2" class="chart-hidden"></div>
-													<script>
-
-														var flotDashSales2Data = [{
-														    data: [
-														        ["Jan", 240],
-														        ["Feb", 240],
-														        ["Mar", 290],
-														        ["Apr", 540],
-														        ["May", 480],
-														        ["Jun", 220],
-														        ["Jul", 170],
-														        ["Aug", 190]
-														    ],
-														    color: "#2baab1"
-														}];
-
-														// See: js/examples/examples.dashboard.js for more settings.
-
-													</script>
-
-													<!-- Flot: Sales Porto Wordpress -->
-													<div class="chart chart-sm" data-sales-rel="Porto Wordpress" id="flotDashSales3" class="chart-hidden"></div>
-													<script>
-
-														var flotDashSales3Data = [{
-														    data: [
-														        ["Jan", 840],
-														        ["Feb", 740],
-														        ["Mar", 690],
-														        ["Apr", 940],
-														        ["May", 1180],
-														        ["Jun", 820],
-														        ["Jul", 570],
-														        ["Aug", 780]
-														    ],
-														    color: "#734ba9"
-														}];
-
-														// See: js/examples/examples.dashboard.js for more settings.
-
-													</script>
-												</div>
-
-											</div>
-										</div>
-										<div class="col-xl-4 text-center">
-											<h2 class="card-title mt-3">Sales Goal</h2>
-											<div class="liquid-meter-wrapper liquid-meter-sm mt-3">
-												<div class="liquid-meter">
-													<meter min="0" max="100" value="35" id="meterSales"></meter>
-												</div>
-												<div class="liquid-meter-selector mt-4 pt-1" id="meterSalesSel">
-													<a href="#" data-val="35" class="active">Monthly Goal</a>
-													<a href="#" data-val="28">Annual Goal</a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</section>
-						</div>
-						<div class="col-lg-6">
-							<div class="row mb-3">
-								<div class="col-xl-6">
-									<section class="card card-featured-left card-featured-primary mb-3">
-										<div class="card-body">
-											<div class="widget-summary">
-												<div class="widget-summary-col widget-summary-col-icon">
-													<div class="summary-icon bg-primary">
-														<i class="fas fa-life-ring"></i>
-													</div>
-												</div>
-												<div class="widget-summary-col">
-													<div class="summary">
-														<h4 class="title">Support Questions</h4>
-														<div class="info">
-															<strong class="amount">1281</strong>
-															<span class="text-primary">(14 unread)</span>
-														</div>
-													</div>
-													<div class="summary-footer">
-														<a class="text-muted text-uppercase" href="#">(view all)</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</section>
-								</div>
-								<div class="col-xl-6">
-									<section class="card card-featured-left card-featured-secondary">
-										<div class="card-body">
-											<div class="widget-summary">
-												<div class="widget-summary-col widget-summary-col-icon">
-													<div class="summary-icon bg-secondary">
-														<i class="fas fa-dollar-sign"></i>
-													</div>
-												</div>
-												<div class="widget-summary-col">
-													<div class="summary">
-														<h4 class="title">Total Profit</h4>
-														<div class="info">
-															<strong class="amount">$ 14,890.30</strong>
-														</div>
-													</div>
-													<div class="summary-footer">
-														<a class="text-muted text-uppercase" href="#">(withdraw)</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</section>
-								</div>
+						<!-- Page Header -->
+						<div class="page-header">
+							<div>
+								<h2 class="main-content-title tx-24 mg-b-5">Welcome To Dashboard</h2>
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="#">Home</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Project Dashboard</li>
+								</ol>
 							</div>
-							<div class="row">
-								<div class="col-xl-6">
-									<section class="card card-featured-left card-featured-tertiary mb-3">
-										<div class="card-body">
-											<div class="widget-summary">
-												<div class="widget-summary-col widget-summary-col-icon">
-													<div class="summary-icon bg-tertiary">
-														<i class="fas fa-shopping-cart"></i>
-													</div>
-												</div>
-												<div class="widget-summary-col">
-													<div class="summary">
-														<h4 class="title">Today's Orders</h4>
-														<div class="info">
-															<strong class="amount">38</strong>
-														</div>
-													</div>
-													<div class="summary-footer">
-														<a class="text-muted text-uppercase" href="#">(statement)</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</section>
-								</div>
-								<div class="col-xl-6">
-									<section class="card card-featured-left card-featured-quaternary">
-										<div class="card-body">
-											<div class="widget-summary">
-												<div class="widget-summary-col widget-summary-col-icon">
-													<div class="summary-icon bg-quaternary">
-														<i class="fas fa-user"></i>
-													</div>
-												</div>
-												<div class="widget-summary-col">
-													<div class="summary">
-														<h4 class="title">Today's Visitors</h4>
-														<div class="info">
-															<strong class="amount">3765</strong>
-														</div>
-													</div>
-													<div class="summary-footer">
-														<a class="text-muted text-uppercase" href="#">(report)</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</section>
+							<div class="d-flex">
+								<div class="justify-content-center">
+									<button type="button" class="btn btn-white btn-icon-text my-2 me-2">
+									  <i class="fe fe-download me-2"></i> Import
+									</button>
+									<button type="button" class="btn btn-white btn-icon-text my-2 me-2">
+									  <i class="fe fe-filter me-2"></i> Filter
+									</button>
+									<button type="button" class="btn btn-primary my-2 btn-icon-text">
+									  <i class="fe fe-download-cloud me-2"></i> Download Report
+									</button>
 								</div>
 							</div>
 						</div>
-					</div>
+						<!-- End Page Header -->
 
-					<div class="row pt-4">
-						<div class="col-lg-6 mb-4 mb-lg-0">
-							<section class="card">
-								<header class="card-header">
-									<div class="card-actions">
-										<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-										<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
-									</div>
+						<!--Row-->
+						<div class="row row-sm">
+							<div class="col-sm-12 col-lg-12 col-xl-8">
 
-									<h2 class="card-title">Best Seller</h2>
-									<p class="card-subtitle">Customize the graphs as much as you want, there are so many options and features to display information using Porto Admin Template.</p>
-								</header>
-								<div class="card-body">
-
-									<!-- Flot: Basic -->
-									<div class="chart chart-md" id="flotDashBasic"></div>
-									<script>
-
-										var flotDashBasicData = [{
-											data: [
-												[0, 170],
-												[1, 169],
-												[2, 173],
-												[3, 188],
-												[4, 147],
-												[5, 113],
-												[6, 128],
-												[7, 169],
-												[8, 173],
-												[9, 128],
-												[10, 128]
-											],
-											label: "Series 1",
-											color: "#0088cc"
-										}, {
-											data: [
-												[0, 115],
-												[1, 124],
-												[2, 114],
-												[3, 121],
-												[4, 115],
-												[5, 83],
-												[6, 102],
-												[7, 148],
-												[8, 147],
-												[9, 103],
-												[10, 113]
-											],
-											label: "Series 2",
-											color: "#2baab1"
-										}, {
-											data: [
-												[0, 70],
-												[1, 69],
-												[2, 73],
-												[3, 88],
-												[4, 47],
-												[5, 13],
-												[6, 28],
-												[7, 69],
-												[8, 73],
-												[9, 28],
-												[10, 28]
-											],
-											label: "Series 3",
-											color: "#734ba9"
-										}];
-
-										// See: js/examples/examples.dashboard.js for more settings.
-
-									</script>
-
-								</div>
-							</section>
-						</div>
-						<div class="col-lg-6">
-							<section class="card">
-								<header class="card-header">
-									<div class="card-actions">
-										<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-										<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
-									</div>
-									<h2 class="card-title">Server Usage</h2>
-									<p class="card-subtitle">It's easy to create custom graphs on Porto Admin Template, there are several graph types that you can use.</p>
-								</header>
-								<div class="card-body">
-
-									<!-- Flot: Curves -->
-									<div class="chart chart-md" id="flotDashRealTime"></div>
-
-								</div>
-							</section>
-						</div>
-					</div>
-
-					<div class="row pt-4 mt-2">
-						<div class="col-lg-6 col-xl-3">
-							<section class="card card-transparent">
-								<header class="card-header">
-									<div class="card-actions">
-										<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-										<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
-									</div>
-
-									<h2 class="card-title">My Profile</h2>
-								</header>
-								<div class="card-body">
-									<section class="card card-group">
-										<header class="card-header bg-primary w-100">
-
-											<div class="widget-profile-info">
-												<div class="profile-picture">
-													<img src="/template/img/!logged-user.jpg">
+								<!--Row-->
+								<div class="row row-sm  mt-lg-4">
+									<div class="col-sm-12 col-lg-12 col-xl-12">
+										<div class="card bg-primary custom-card card-box">
+											<div class="card-body p-4">
+												<div class="row align-items-center">
+													<div class="offset-xl-3 offset-sm-6 col-xl-8 col-sm-6 col-12">
+														<h4 class="d-flex  mb-3">
+															<span class="font-weight-bold text-white ">Sonia Taylor!</span>
+														</h4>
+														<p class="tx-white-7 mb-1">You have two projects to finish, you had completed <b class="text-warning">57%</b> from your montly level,
+														Keep going to your level
+													</div>
+													<img src="/template2/img/pngs/work3.png" alt="user-img">
 												</div>
-												<div class="profile-info">
-													<h4 class="name font-weight-semibold">John Doe</h4>
-													<h5 class="role">Administrator</h5>
-													<div class="profile-footer">
-														<a href="#">(edit profile)</a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--Row -->
+
+								<!--Row-->
+								<div class="row row-sm">
+									<div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+										<div class="card custom-card">
+											<div class="card-body">
+												<div class="card-item">
+													<div class="card-item-icon card-icon">
+														<svg class="text-primary" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24"><g><rect height="14" opacity=".3" width="14" x="5" y="5"/><g><rect fill="none" height="24" width="24"/><g><path d="M19,3H5C3.9,3,3,3.9,3,5v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V5C21,3.9,20.1,3,19,3z M19,19H5V5h14V19z"/><rect height="5" width="2" x="7" y="12"/><rect height="10" width="2" x="15" y="7"/><rect height="3" width="2" x="11" y="14"/><rect height="2" width="2" x="11" y="10"/></g></g></g></svg>
+													</div>
+													<div class="card-item-title mb-2">
+														<label class="main-content-label tx-13 font-weight-bold mb-1">Total Revenue</label>
+														<span class="d-block tx-12 mb-0 text-muted">Previous month vs this months</span>
+													</div>
+													<div class="card-item-body">
+														<div class="card-item-stat">
+															<h4 class="font-weight-bold">$5,900.00</h4>
+															<small><b class="text-success">55%</b> higher</small>
+														</div>
 													</div>
 												</div>
 											</div>
-
-										</header>
-										<div id="accordion" class="w-100">
-											<div class="card card-accordion card-accordion-first">
-												<div class="card-header border-bottom-0">
-													<h4 class="card-title">
-														<a class="accordion-toggle" data-bs-toggle="collapse" data-bs-parent="#accordion" data-bs-target="#collapse1One">
-															<i class="fas fa-check me-1"></i> Tasks
-														</a>
-													</h4>
+										</div>
+									</div>
+									<div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+										<div class="card custom-card">
+											<div class="card-body">
+												<div class="card-item">
+													<div class="card-item-icon card-icon">
+														<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 4c-4.41 0-8 3.59-8 8 0 1.82.62 3.49 1.64 4.83 1.43-1.74 4.9-2.33 6.36-2.33s4.93.59 6.36 2.33C19.38 15.49 20 13.82 20 12c0-4.41-3.59-8-8-8zm0 9c-1.94 0-3.5-1.56-3.5-3.5S10.06 6 12 6s3.5 1.56 3.5 3.5S13.94 13 12 13z" opacity=".3"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM7.07 18.28c.43-.9 3.05-1.78 4.93-1.78s4.51.88 4.93 1.78C15.57 19.36 13.86 20 12 20s-3.57-.64-4.93-1.72zm11.29-1.45c-1.43-1.74-4.9-2.33-6.36-2.33s-4.93.59-6.36 2.33C4.62 15.49 4 13.82 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8c0 1.82-.62 3.49-1.64 4.83zM12 6c-1.94 0-3.5 1.56-3.5 3.5S10.06 13 12 13s3.5-1.56 3.5-3.5S13.94 6 12 6zm0 5c-.83 0-1.5-.67-1.5-1.5S11.17 8 12 8s1.5.67 1.5 1.5S12.83 11 12 11z"/></svg>
+													</div>
+													<div class="card-item-title mb-2">
+														<label class="main-content-label tx-13 font-weight-bold mb-1">New Employees</label>
+														<span class="d-block tx-12 mb-0 text-muted">Employees joined this month</span>
+													</div>
+													<div class="card-item-body">
+														<div class="card-item-stat">
+															<h4 class="font-weight-bold">15</h4>
+															<small><b class="text-success">5%</b> Increased</small>
+														</div>
+													</div>
 												</div>
-												<div id="collapse1One" class="accordion-body collapse show">
-													<div class="card-body">
-														<ul class="widget-todo-list">
-															<li>
-																<div class="checkbox-custom checkbox-default">
-																	<input type="checkbox" checked="" id="todoListItem1" class="todo-check">
-																	<label class="todo-label" for="todoListItem1"><span>Curabitur ac sem at nibh egestas urabitur ac sem at nibh egestas.</span></label>
-																</div>
-																<div class="todo-actions">
-																	<a class="todo-remove" href="#">
-																		<i class="fas fa-times"></i>
-																	</a>
-																</div>
-															</li>
-															<li>
-																<div class="checkbox-custom checkbox-default">
-																	<input type="checkbox" id="todoListItem2" class="todo-check">
-																	<label class="todo-label" for="todoListItem2"><span>Lorem ipsum dolor sit amet</span></label>
-																</div>
-																<div class="todo-actions">
-																	<a class="todo-remove" href="#">
-																		<i class="fas fa-times"></i>
-																	</a>
-																</div>
-															</li>
-															<li>
-																<div class="checkbox-custom checkbox-default">
-																	<input type="checkbox" id="todoListItem3" class="todo-check">
-																	<label class="todo-label" for="todoListItem3"><span>Curabitur ac sem at nibh egestas</span></label>
-																</div>
-																<div class="todo-actions">
-																	<a class="todo-remove" href="#">
-																		<i class="fas fa-times"></i>
-																	</a>
-																</div>
-															</li>
-															<li>
-																<div class="checkbox-custom checkbox-default">
-																	<input type="checkbox" id="todoListItem4" class="todo-check">
-																	<label class="todo-label" for="todoListItem4"><span>Lorem ipsum dolor sit amet</span></label>
-																</div>
-																<div class="todo-actions">
-																	<a class="todo-remove" href="#">
-																		<i class="fas fa-times"></i>
-																	</a>
-																</div>
-															</li>
-															<li>
-																<div class="checkbox-custom checkbox-default">
-																	<input type="checkbox" id="todoListItem5" class="todo-check">
-																	<label class="todo-label" for="todoListItem5"><span>Curabitur ac sem at nibh egestas.</span></label>
-																</div>
-																<div class="todo-actions">
-																	<a class="todo-remove" href="#">
-																		<i class="fas fa-times"></i>
-																	</a>
-																</div>
-															</li>
-															<li>
-																<div class="checkbox-custom checkbox-default">
-																	<input type="checkbox" id="todoListItem6" class="todo-check">
-																	<label class="todo-label" for="todoListItem6"><span>Lorem ipsum dolor sit amet</span></label>
-																</div>
-																<div class="todo-actions">
-																	<a class="todo-remove" href="#">
-																		<i class="fas fa-times"></i>
-																	</a>
-																</div>
-															</li>
-															<li>
-																<div class="checkbox-custom checkbox-default">
-																	<input type="checkbox" id="todoListItem7" class="todo-check">
-																	<label class="todo-label" for="todoListItem7"><span>Curabitur ac sem at nibh egestas.</span></label>
-																</div>
-																<div class="todo-actions">
-																	<a class="todo-remove" href="#">
-																		<i class="fas fa-times"></i>
-																	</a>
-																</div>
-															</li>
-														</ul>
-														<hr class="solid mt-3 mb-3">
-														<form method="get" class="form-horizontal form-bordered">
-															<div class="form-group row">
-																<div class="col-sm-12">
-																	<div class="input-group mb-3">
-																		<input type="text" class="form-control">
-																		<button type="button" class="btn btn-primary" tabindex="-1">Add</button>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-12 col-md-12 col-lg-12 col-xl-4">
+										<div class="card custom-card">
+											<div class="card-body">
+												<div class="card-item">
+													<div class="card-item-icon card-icon">
+														<svg class="text-primary" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 4c-4.41 0-8 3.59-8 8s3.59 8 8 8 8-3.59 8-8-3.59-8-8-8zm1.23 13.33V19H10.9v-1.69c-1.5-.31-2.77-1.28-2.86-2.97h1.71c.09.92.72 1.64 2.32 1.64 1.71 0 2.1-.86 2.1-1.39 0-.73-.39-1.41-2.34-1.87-2.17-.53-3.66-1.42-3.66-3.21 0-1.51 1.22-2.48 2.72-2.81V5h2.34v1.71c1.63.39 2.44 1.63 2.49 2.97h-1.71c-.04-.97-.56-1.64-1.94-1.64-1.31 0-2.1.59-2.1 1.43 0 .73.57 1.22 2.34 1.67 1.77.46 3.66 1.22 3.66 3.42-.01 1.6-1.21 2.48-2.74 2.77z" opacity=".3"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.31-8.86c-1.77-.45-2.34-.94-2.34-1.67 0-.84.79-1.43 2.1-1.43 1.38 0 1.9.66 1.94 1.64h1.71c-.05-1.34-.87-2.57-2.49-2.97V5H10.9v1.69c-1.51.32-2.72 1.3-2.72 2.81 0 1.79 1.49 2.69 3.66 3.21 1.95.46 2.34 1.15 2.34 1.87 0 .53-.39 1.39-2.1 1.39-1.6 0-2.23-.72-2.32-1.64H8.04c.1 1.7 1.36 2.66 2.86 2.97V19h2.34v-1.67c1.52-.29 2.72-1.16 2.73-2.77-.01-2.2-1.9-2.96-3.66-3.42z"/></svg>
+													</div>
+													<div class="card-item-title  mb-2">
+														<label class="main-content-label tx-13 font-weight-bold mb-1">Total Expenses</label>
+														<span class="d-block tx-12 mb-0 text-muted">Previous month vs this months</span>
+													</div>
+													<div class="card-item-body">
+														<div class="card-item-stat">
+															<h4 class="font-weight-bold">$8,500</h4>
+															<small><b class="text-danger">12%</b> decrease</small>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--End row-->
+
+								<!--row-->
+								<div class="row row-sm">
+									<div class="col-sm-12 col-lg-12 col-xl-12">
+										<div class="card custom-card overflow-hidden">
+											<div class="card-header border-bottom-0">
+												<div>
+													<label class="main-content-label mb-2">Project Budget</label> <span class="d-block tx-12 mb-0 text-muted">The Project Budget is a tool used by project managers to estimate the total cost of a project</span>
+												</div>
+											</div>
+											<div class="card-body ps-0">
+												<div class>
+													<div class="container">
+													   <canvas id="chartLine" class="chart-dropshadow2 ht-250"></canvas>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div><!-- col end -->
+									<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+										<div class="card custom-card overflow-hidden">
+											<div class="card-header  border-bottom-0 pb-0">
+												<div>
+													<div class="d-md-flex">
+														<label class="main-content-label my-auto pt-2">Today tasks</label>
+														<div class="ms-auto mt-3 d-flex">
+															<div class="me-3 d-flex text-muted tx-13"><span class="legend bg-primary rounded-circle"></span>Project</div>
+															<div class="d-flex text-muted tx-13"><span class="legend bg-light rounded-circle"></span>Inprogress</div>
+														</div>
+													</div>
+													<span class="d-block tx-12 mt-2 mb-0 text-muted"> UX UI & Backend Developement. </span>
+												</div>
+											</div>
+											<div class="card-body">
+												<div class="row">
+													<div class="col-sm-6 my-auto">
+														<h6 class="mb-3 font-weight-normal">Project-Budget</h6>
+														<div class="text-start">
+															<h3 class="font-weight-bold me-3 mb-2 text-primary">$5,240</h3>
+															<p class="tx-13 my-auto text-muted">May 28 - June 01 (2018)</p>
+														</div>
+													</div>
+													<div class="col-md-6 my-auto">
+														<div class="forth circle">
+															<div class="chart-circle-value circle-style"><div class="tx-16 font-weight-bold">75%</div></div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div><!-- col end -->
+									<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+										<div class="card custom-card">
+											<div class="card-header  border-bottom-0 pb-0">
+												<div>
+													<div class="d-flex">
+														<label class="main-content-label my-auto pt-2">Top Inquiries</label>
+													</div>
+													<span class="d-block tx-12 mt-2 mb-0 text-muted"> project work involves a group of students investigating . </span>
+												</div>
+											</div>
+											<div class="card-body">
+												<div class="row mt-1">
+													<div class="col-5">
+														<span class="">Brand identity</span>
+													</div>
+													<div class="col-4 my-auto">
+														<div class="progress ht-6 my-auto">
+															<div class="progress-bar ht-6 wd-80p" role="progressbar"  aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+														</div>
+													</div>
+													<div class="col-3">
+														<div class="d-flex">
+															<span class="tx-13"><i class="text-success fe fe-arrow-up"></i><b>24.75%</b></span>
+														</div>
+													</div>
+												</div>
+												<div class="row mt-4">
+													<div class="col-5">
+														<span class="">UI & UX design</span>
+													</div>
+													<div class="col-4 my-auto">
+														<div class="progress ht-6 my-auto">
+															<div class="progress-bar ht-6 wd-70p" role="progressbar"  aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+														</div>
+													</div>
+													<div class="col-3">
+														<div class="d-flex">
+															<span class="tx-13"><i class="text-danger fe fe-arrow-down"></i><b>12.34%</b></span>
+														</div>
+													</div>
+												</div>
+												<div class="row mt-4">
+													<div class="col-5">
+														<span class="">Product design</span>
+													</div>
+													<div class="col-4 my-auto">
+														<div class="progress ht-6 my-auto">
+															<div class="progress-bar ht-6 wd-40p" role="progressbar"  aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+														</div>
+													</div>
+													<div class="col-3">
+														<div class="d-flex">
+															<span class="tx-13"><i class="text-success  fe fe-arrow-up"></i><b>12.75%</b></span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div><!-- col end -->
+									<div class="col-lg-12">
+										<div class="card custom-card mg-b-20">
+											<div class="card-body">
+												<div class="card-header border-bottom-0 pt-0 ps-0 pe-0 d-flex">
+													<div>
+														<label class="main-content-label mb-2">Tasks</label> <span class="d-block tx-12 mb-3 text-muted">A task is accomplished by a set deadline, and must contribute toward work-related objectives.</span>
+													</div>
+													<div class="ms-auto">
+														<a href="#" class="option-dots" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fe fe-more-vertical"></i></a>
+														<div class="dropdown-menu">
+															<a class="dropdown-item" href="#">Task</a>
+															<a class="dropdown-item" href="#">Team</a>
+															<a class="dropdown-item" href="#">Status</a>
+															<div class="dropdown-divider"></div>
+															<a class="dropdown-item" href="#"><i class="fa fa-cog me-2"></i> Settings</a>
+														</div>
+													</div>
+												</div>
+												<div class="table-responsive tasks">
+													<table class="table card-table table-vcenter text-nowrap mb-0  border">
+														<thead>
+															<tr>
+																<th class="wd-lg-10p">Task</th>
+																<th class="wd-lg-20p">Team</th>
+																<th class="wd-lg-20p text-center">Open task</th>
+																<th class="wd-lg-20p">Prority</th>
+																<th class="wd-lg-20p">Status</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td class="font-weight-semibold d-flex"><label class="ckbox my-auto me-4 mt-1"><input checked="" type="checkbox"><span></span></label><span class="mt-1">Evaluating the design</span></td>
+																<td class="text-nowrap">
+																	<div class="demo-avatar-group my-auto float-end">
+																		<div class="main-img-user avatar-sm">
+																			<img alt="avatar" class="rounded-circle" src="/template2/img/users/1.jpg">
+																		</div>
+																		<div class="main-img-user avatar-sm">
+																			<img alt="avatar" class="rounded-circle" src="/template2/img/users/2.jpg">
+																		</div>
+																		<div class="main-img-user avatar-sm">
+																			<img alt="avatar" class="rounded-circle" src="/template2/img/users/3.jpg">
+																		</div>
+																		<div class="main-img-user avatar-sm">
+																			<img alt="avatar" class="rounded-circle" src="/template2/img/users/4.jpg">
+																		</div>
 																	</div>
-																</div>
-															</div>
-														</form>
-													</div>
+																</td>
+																<td class="text-center">37<i class=""></i></td>
+																<td class="text-primary">High</td>
+																<td><span class="badge bg-pill bg-primary-light">Completed</span></td>
+															</tr>
+															<tr>
+																<td class="font-weight-semibold d-flex"><label class="ckbox my-auto me-4"><input checked="" type="checkbox"><span></span></label><span class="mt-1"> Generate ideas for design</span></td>
+																<td class="text-nowrap">
+																	<div class="demo-avatar-group my-auto float-end">
+																		<div class="main-img-user avatar-sm">
+																			<img alt="avatar" class="rounded-circle" src="/template2/img/users/5.jpg">
+																		</div>
+																		<div class="main-img-user avatar-sm">
+																			<img alt="avatar" class="rounded-circle" src="/template2/img/users/6.jpg">
+																		</div>
+																		<div class="main-img-user avatar-sm">
+																			<img alt="avatar" class="rounded-circle" src="/template2/img/users/7.jpg">
+																		</div>
+																		<div class="main-img-user avatar-sm">
+																			<img alt="avatar" class="rounded-circle" src="/template2/img/users/8.jpg">
+																		</div>
+																	</div>
+																</td>
+																<td class="text-center">37<i class=""></i></td>
+																<td class="text-secondary">Normal</td>
+																<td><span class="badge bg-pill bg-warning-light">Pending</span></td>
+															</tr>
+															<tr>
+																<td class="font-weight-semibold d-flex"><label class="ckbox my-auto me-4"><input type="checkbox"><span></span></label><span class="mt-1">Define the problem</span></td>
+																<td class="text-nowrap">
+																	<div class="demo-avatar-group my-auto float-end">
+																		<div class="main-img-user avatar-sm">
+																			<img alt="avatar" class="rounded-circle" src="/template2/img/users/11.jpg">
+																		</div>
+																		<div class="main-img-user avatar-sm">
+																			<img alt="avatar" class="rounded-circle" src="/template2/img/users/12.jpg">
+																		</div>
+																		<div class="main-img-user avatar-sm">
+																			<img alt="avatar" class="rounded-circle" src="/template2/img/users/9.jpg">
+																		</div>
+																		<div class="main-img-user avatar-sm">
+																			<img alt="avatar" class="rounded-circle" src="/template2/img/users/10.jpg">
+																		</div>
+																	</div>
+																</td>
+																<td class="text-center">37<i class=""></i></td>
+																<td class="text-warning">Low</td>
+																<td><span class="badge bg-pill bg-primary-light">Completed</span></td>
+															</tr>
+															<tr>
+																<td class="font-weight-semibold d-flex"><label class="ckbox my-auto me-4"><input type="checkbox"><span></span></label><span class="mt-1">Empathize with users</span></td>
+																<td class="text-nowrap">
+																	<div class="demo-avatar-group my-auto float-end">
+																		<div class="main-img-user avatar-sm">
+																			<img alt="avatar" class="rounded-circle" src="/template2/img/users/7.jpg">
+																		</div>
+																		<div class="main-img-user avatar-sm">
+																			<img alt="avatar" class="rounded-circle" src="/template2/img/users/9.jpg">
+																		</div>
+																		<div class="main-img-user avatar-sm">
+																			<img alt="avatar" class="rounded-circle" src="/template2/img/users/11.jpg">
+																		</div>
+																		<div class="main-img-user avatar-sm">
+																			<img alt="avatar" class="rounded-circle" src="/template2/img/users/12.jpg">
+																		</div>
+																	</div>
+																</td>
+																<td class="text-center">37<i class=""></i></td>
+																<td class="text-primary">High</td>
+																<td><span class="badge bg-pill bg-danger-light">Rejected</span></td>
+															</tr>
+														</tbody>
+													</table>
 												</div>
 											</div>
-											<div class="card card-accordion">
-												<div class="card-header border-bottom-0">
-													<h4 class="card-title">
-														<a class="accordion-toggle" data-bs-toggle="collapse" data-bs-parent="#accordion" data-bs-target="#collapse1Two">
-															 <i class="fas fa-comment me-1"></i> Messages
-														</a>
-													</h4>
-												</div>
-												<div id="collapse1Two" class="accordion-body collapse">
-													<div class="card-body">
-														<ul class="simple-user-list mb-3">
-															<li>
-																<figure class="image rounded">
-																	<img src="/template/img/!sample-user.jpg" alt="Joseph Doe Junior" class="rounded-circle">
-																</figure>
-																<span class="title">Joseph Doe Junior</span>
-																<span class="message">Lorem ipsum dolor sit.</span>
-															</li>
-															<li>
-																<figure class="image rounded">
-																	<img src="/template/img/!sample-user.jpg" alt="Joseph Junior" class="rounded-circle">
-																</figure>
-																<span class="title">Joseph Junior</span>
-																<span class="message">Lorem ipsum dolor sit.</span>
-															</li>
-															<li>
-																<figure class="image rounded">
-																	<img src="/template/img/!sample-user.jpg" alt="Joe Junior" class="rounded-circle">
-																</figure>
-																<span class="title">Joe Junior</span>
-																<span class="message">Lorem ipsum dolor sit.</span>
-															</li>
-															<li>
-																<figure class="image rounded">
-																	<img src="/template/img/!sample-user.jpg" alt="Joseph Doe Junior" class="rounded-circle">
-																</figure>
-																<span class="title">Joseph Doe Junior</span>
-																<span class="message">Lorem ipsum dolor sit.</span>
-															</li>
-														</ul>
-													</div>
-												</div>
-											</div>
 										</div>
-									</section>
-
-								</div>
-							</section>
-						</div>
-						<div class="col-lg-6 col-xl-3">
-							<section class="card card-transparent">
-								<header class="card-header">
-									<div class="card-actions">
-										<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-										<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
-									</div>
-
-									<h2 class="card-title">My Stats</h2>
-								</header>
-								<div class="card-body">
-									<section class="card">
-										<div class="card-body">
-											<div class="small-chart float-end" id="sparklineBarDash"></div>
-											<script type="text/javascript">
-												var sparklineBarDashData = [5, 6, 7, 2, 0, 4 , 2, 4, 2, 0, 4 , 2, 4, 2, 0, 4];
-											</script>
-											<div class="h4 font-weight-bold mb-0">488</div>
-											<p class="text-3 text-muted mb-0">Average Profile Visits</p>
-										</div>
-									</section>
-									<section class="card">
-										<div class="card-body">
-											<div class="circular-bar circular-bar-xs m-0 mt-1 me-4 mb-0 float-end">
-												<div class="circular-bar-chart" data-percent="45" data-plugin-options='{ "barColor": "#2baab1", "delay": 300, "size": 50, "lineWidth": 4 }'>
-													<strong>Average</strong>
-													<label><span class="percent">45</span>%</label>
-												</div>
-											</div>
-											<div class="h4 font-weight-bold mb-0">12</div>
-											<p class="text-3 text-muted mb-0">Working Projects</p>
-										</div>
-									</section>
-									<section class="card">
-										<div class="card-body">
-											<div class="small-chart float-end" id="sparklineLineDash"></div>
-											<script type="text/javascript">
-												var sparklineLineDashData = [15, 16, 17, 19, 10, 15, 13, 12, 12, 14, 16, 17];
-											</script>
-											<div class="h4 font-weight-bold mb-0">89</div>
-											<p class="text-3 text-muted mb-0">Pending Tasks</p>
-										</div>
-									</section>
-								</div>
-							</section>
-							<section class="card mb-3">
-								<header class="card-header">
-									<div class="card-actions">
-										<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-										<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
-									</div>
-
-									<h2 class="card-title">
-										<span class="badge badge-primary font-weight-normal va-middle p-2 me-e">298</span>
-										<span class="va-middle">Friends</span>
-									</h2>
-								</header>
-								<div class="card-body">
-									<div class="content">
-										<ul class="simple-user-list">
-											<li>
-												<figure class="image rounded">
-													<img src="/template/img/!sample-user.jpg" alt="Joseph Doe Junior" class="rounded-circle">
-												</figure>
-												<span class="title">Joseph Doe Junior</span>
-												<span class="message truncate">Lorem ipsum dolor sit.</span>
-											</li>
-											<li>
-												<figure class="image rounded">
-													<img src="/template/img/!sample-user.jpg" alt="Joseph Junior" class="rounded-circle">
-												</figure>
-												<span class="title">Joseph Junior</span>
-												<span class="message truncate">Lorem ipsum dolor sit.</span>
-											</li>
-											<li>
-												<figure class="image rounded">
-													<img src="/template/img/!sample-user.jpg" alt="Joe Junior" class="rounded-circle">
-												</figure>
-												<span class="title">Joe Junior</span>
-												<span class="message truncate">Lorem ipsum dolor sit.</span>
-											</li>
-										</ul>
-										<hr class="dotted short">
-										<div class="text-end">
-											<a class="text-uppercase text-muted" href="#">(View All)</a>
-										</div>
-									</div>
-								</div>
-								<div class="card-footer">
-									<div class="input-group">
-										<input type="text" class="form-control" name="s" id="s" placeholder="Search...">
-										<button class="btn btn-default" type="submit"><i class="bx bx-search"></i></button>
-									</div>
-								</div>
-							</section>
-						</div>
-						<div class="col-lg-12 col-xl-6">
-							<section class="card">
-								<header class="card-header card-header-transparent">
-									<div class="card-actions">
-										<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-										<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
-									</div>
-
-									<h2 class="card-title">Company Activity</h2>
-								</header>
-								<div class="card-body">
-									<div class="timeline timeline-simple mt-3 mb-3">
-										<div class="tm-body">
-											<div class="tm-title">
-												<h5 class="m-0 pt-2 pb-2 text-dark font-weight-semibold text-uppercase">November 2021</h5>
-											</div>
-											<ol class="tm-items">
-												<li>
-													<div class="tm-box">
-														<p class="text-muted mb-0">7 months ago.</p>
-														<p>
-															Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas hendrerit augue at leo viverra, aliquam egestas lectus laoreet. Donec vehicula vestibulum ipsum, tincidunt ultrices elit suscipit ac. Sed eget risus laoreet, varius nibh id, luctus ligula. Nulla facilisi. <span class="text-primary">#awesome</span>
-														</p>
-													</div>
-												</li>
-												<li>
-													<div class="tm-box">
-														<p class="text-muted mb-0">7 months ago.</p>
-														<p>
-															Checkout! How cool is that! Etiam efficitur, sapien eget vehicula gravida, magna neque volutpat risus, vitae tempus odio arcu ac elit. Aenean porta orci eu mi fermentum varius. Curabitur ac sem at nibh egestas. Curabitur ac sem at nibh egestas.
-														</p>
-														<div class="thumbnail-gallery">
-															<a class="img-thumbnail lightbox" href="/template/img/projects/project-4.jpg" data-plugin-options='{ "type":"image" }'>
-																<img class="img-fluid" width="215" src="/template/img/projects/project-4.jpg">
-																<span class="zoom">
-																	<i class="bx bx-search"></i>
-																</span>
-															</a>
-														</div>
-													</div>
-												</li>
-											</ol>
-										</div>
-									</div>
-								</div>
-							</section>
-						</div>
-					</div>
-					<div class="row pt-4 mt-1">
-						<div class="col-xl-6">
-							<section class="card card-transparent mb-3">
-								<header class="card-header">
-									<div class="card-actions">
-										<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-										<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
-									</div>
-
-									<h2 class="card-title">Global Stats</h2>
-								</header>
-								<div class="card-body">
-									<div id="vectorMapWorld" style="height: 350px; width: 100%;"></div>
-								</div>
-							</section>
-						</div>
-						<div class="col-xl-6">
-							<section class="card">
-								<header class="card-header card-header-transparent">
-									<div class="card-actions">
-										<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-										<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
-									</div>
-
-									<h2 class="card-title">Projects Stats</h2>
-								</header>
-								<div class="card-body">
-									<table class="table table-responsive-md table-striped mb-0">
-										<thead>
-											<tr>
-												<th>#</th>
-												<th>Project</th>
-												<th>Status</th>
-												<th>Progress</th>
-											</tr>
-										</thead>
+									</div><!-- col end -->
+								</div><!-- Row end -->
+							</div><!-- col end -->
+							<div class="col-sm-12 col-lg-12 col-xl-4 mt-xl-4">
+								<div class="card custom-card card-dashboard-calendar pb-0">
+									<label class="main-content-label mb-2 pt-1">Recent transcations</label>
+									<span class="d-block tx-12 mb-2 text-muted">Projects where development work is on completion</span>
+									<table class="table table-hover m-b-0 transcations mt-2">
 										<tbody>
 											<tr>
-												<td>1</td>
-												<td>Porto - Responsive HTML5 Template</td>
-												<td><span class="badge badge-success">Success</span></td>
+												<td class="wd-5p">
+													<div class="main-img-user avatar-md">
+														<img alt="avatar" class="rounded-circle me-3" src="/template2/img/users/5.jpg">
+													</div>
+												</td>
 												<td>
-													<div class="progress progress-sm progress-half-rounded m-0 mt-1 light">
-														<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-															100%
+													<div class="d-flex align-middle ms-3">
+														<div class="d-inline-block">
+															<h6 class="mb-1">Flicker</h6>
+															<p class="mb-0 tx-13 text-muted">App improvement</p>
 														</div>
+													</div>
+												</td>
+												<td class="text-end">
+													<div class="d-inline-block">
+														<h6 class="mb-2 tx-15 font-weight-semibold">$45.234<i class="fas fa-level-up-alt ms-2 text-success m-l-10"></i></h6>
+														<p class="mb-0 tx-11 text-muted">12 Jan 2020</p>
+													</div>
+												</td>
+											</tr>
+											 <tr>
+												<td class="wd-5p">
+													<div class="main-img-user avatar-md">
+														<img alt="avatar" class="rounded-circle me-3" src="/template2/img/users/6.jpg">
+													</div>
+												</td>
+												<td>
+													<div class="d-flex align-middle ms-3">
+														<div class="d-inline-block">
+															<h6 class="mb-1">Intoxica</h6>
+															<p class="mb-0 tx-13 text-muted">Milestone</p>
+														</div>
+													</div>
+												</td>
+												<td class="text-end">
+													<div class="d-inline-block">
+														<h6 class="mb-2 tx-15 font-weight-semibold">$23.452<i class="fas fa-level-down-alt ms-2 text-danger m-l-10"></i></h6>
+														<p class="mb-0 tx-11 text-muted">23 Jan 2020</p>
 													</div>
 												</td>
 											</tr>
 											<tr>
-												<td>2</td>
-												<td>Porto - Responsive Drupal 7 Theme</td>
-												<td><span class="badge badge-success">Success</span></td>
+												<td class="wd-5p">
+													<div class="main-img-user avatar-md">
+														<img alt="avatar" class="rounded-circle me-3" src="/template2/img/users/7.jpg">
+													</div>
+												</td>
 												<td>
-													<div class="progress progress-sm progress-half-rounded m-0 mt-1 light">
-														<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-															100%
+													<div class="d-flex align-middle ms-3">
+														<div class="d-inline-block">
+															<h6 class="mb-1">Digiwatt</h6>
+															<p class="mb-0 tx-13 text-muted">Sales executive</p>
 														</div>
+													</div>
+												</td>
+												<td class="text-end">
+													<div class="d-inline-block">
+														<h6 class="mb-2 tx-15 font-weight-semibold">$78.001<i class="fas fa-level-down-alt ms-2 text-danger m-l-10"></i></h6>
+														<p class="mb-0 tx-11 text-muted">4 Apr 2020</p>
 													</div>
 												</td>
 											</tr>
 											<tr>
-												<td>3</td>
-												<td>Tucson - Responsive HTML5 Template</td>
-												<td><span class="badge badge-warning">Warning</span></td>
+												<td class="wd-5p">
+													<div class="main-img-user avatar-md">
+														<img alt="avatar" class="rounded-circle me-3" src="/template2/img/users/8.jpg">
+													</div>
+												</td>
 												<td>
-													<div class="progress progress-sm progress-half-rounded m-0 mt-1 light">
-														<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-															60%
+													<div class="d-flex align-middle ms-3">
+														<div class="d-inline-block">
+															<h6 class="mb-1">Flicker</h6>
+															<p class="mb-0 tx-13 text-muted">Milestone2</p>
 														</div>
+													</div>
+												</td>
+												<td class="text-end">
+													<div class="d-inline-block">
+														<h6 class="mb-2 tx-15 font-weight-semibold">$37.285<i class="fas fa-level-up-alt ms-2 text-success m-l-10"></i></h6>
+														<p class="mb-0 tx-11 text-muted">4 Apr 2020</p>
 													</div>
 												</td>
 											</tr>
 											<tr>
-												<td>4</td>
-												<td>Tucson - Responsive Business WordPress Theme</td>
-												<td><span class="badge badge-success">Success</span></td>
-												<td>
-													<div class="progress progress-sm progress-half-rounded m-0 mt-1 light">
-														<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 90%;">
-															90%
+												<td class="wd-5p pb-0">
+													<div class="main-img-user avatar-md">
+														<img alt="avatar" class="rounded-circle me-3" src="/template2/img/users/4.jpg">
+													</div>
+												</td>
+												<td class="pb-0">
+													<div class="d-flex align-middle ms-3">
+														<div class="d-inline-block">
+															<h6 class="mb-1">Flicker</h6>
+															<p class="mb-0 tx-13 text-muted">App improvement</p>
 														</div>
 													</div>
 												</td>
-											</tr>
-											<tr>
-												<td>5</td>
-												<td>Porto - Responsive Admin HTML5 Template</td>
-												<td><span class="badge badge-warning">Warning</span></td>
-												<td>
-													<div class="progress progress-sm progress-half-rounded m-0 mt-1 light">
-														<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 45%;">
-															45%
-														</div>
-													</div>
-												</td>
-											</tr>
-											<tr>
-												<td>6</td>
-												<td>Porto - Responsive HTML5 Template</td>
-												<td><span class="badge badge-danger">Danger</span></td>
-												<td>
-													<div class="progress progress-sm progress-half-rounded m-0 mt-1 light">
-														<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
-															40%
-														</div>
-													</div>
-												</td>
-											</tr>
-											<tr>
-												<td>7</td>
-												<td>Porto - Responsive Drupal 7 Theme</td>
-												<td><span class="badge badge-success">Success</span></td>
-												<td>
-													<div class="progress progress-sm progress-half-rounded mt-1 light">
-														<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 95%;">
-															95%
-														</div>
+												<td class="text-end pb-0">
+													<div class="d-inline-block">
+														<h6 class="mb-2 tx-15 font-weight-semibold">$25.341<i class="fas fa-level-down-alt ms-2 text-danger m-l-10"></i></h6>
+														<p class="mb-0 tx-11 text-muted">4 Apr 2020</p>
 													</div>
 												</td>
 											</tr>
 										</tbody>
 									</table>
 								</div>
-							</section>
-						</div>
+								<div class="card custom-card">
+									<div class="card-body">
+										<div class="row row-sm">
+											<div class="col-6">
+												<div class="card-item-title">
+													<label class="main-content-label tx-13 font-weight-bold mb-2">Project Launch</label>
+													<span class="d-block tx-12 mb-0 text-muted">the project is going to launch</span>
+												</div>
+												<p class="mb-0 tx-24 mt-2"><b class="text-primary">145 days</b></p>
+												<a href="#" class="text-muted">12 Monday, Oct 2020 </a>
+											</div>
+											<div class="col-6">
+												<img src="/template2/img/pngs/work.png" alt="image" class="best-emp">
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="card custom-card">
+									<div class="card-header border-bottom-0 pb-0 d-flex ps-3 ms-1">
+										<div>
+											<label class="main-content-label mb-2 pt-2">On goiong projects</label>
+											<span class="d-block tx-12 mb-2 text-muted">Projects where development work is on completion</span>
+										</div>
+									</div>
+									<div class="card-body pt-2 mt-0">
+										<div class="list-card">
+											<div class="d-flex">
+												<div class="demo-avatar-group my-auto float-end">
+													<div class="main-img-user avatar-xs">
+														<img alt="avatar" class="rounded-circle" src="/template2/img/users/1.jpg">
+													</div>
+													<div class="main-img-user avatar-xs">
+														<img alt="avatar" class="rounded-circle" src="/template2/img/users/2.jpg">
+													</div>
+													<div class="main-img-user avatar-xs">
+														<img alt="avatar" class="rounded-circle" src="/template2/img/users/3.jpg">
+													</div>
+													<div class="main-img-user avatar-xs">
+														<img alt="avatar" class="rounded-circle" src="/template2/img/users/4.jpg">
+													</div>
+													<div class="">Design team</div>
+												</div>
+												<div class="ms-auto float-end">
+													<div class="">
+														<a href="#" class="option-dots" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fe fe-more-horizontal"></i></a>
+														<div class="dropdown-menu dropdown-menu-end" style="">
+															<a class="dropdown-item" href="#">Today</a>
+															<a class="dropdown-item" href="#">Last Week</a>
+															<a class="dropdown-item" href="#">Last Month</a>
+															<a class="dropdown-item" href="#">Last Year</a>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="card-item mt-4">
+												<div class="card-item-icon bg-transparent card-icon">
+													<span class="peity-donut" data-peity='{ "fill": ["#6259ca", "rgba(204, 204, 204,0.3)"], "innerRadius": 15, "radius": 20}'>6/7</span>
+												</div>
+												<div class="card-item-body">
+													<div class="card-item-stat">
+														<small class="tx-10 text-primary font-weight-semibold">25 August 2020</small>
+														<h6 class=" mt-2">Mobile app design</h6>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="list-card mb-0">
+											<div class="d-flex">
+												<div class="demo-avatar-group my-auto float-end">
+													<div class="main-img-user avatar-xs">
+														<img alt="avatar" class="rounded-circle" src="/template2/img/users/5.jpg">
+													</div>
+													<div class="main-img-user avatar-xs">
+														<img alt="avatar" class="rounded-circle" src="/template2/img/users/6.jpg">
+													</div>
+													<div class="main-img-user avatar-xs">
+														<img alt="avatar" class="rounded-circle" src="/template2/img/users/7.jpg">
+													</div>
+													<div class="main-img-user avatar-xs">
+														<img alt="avatar" class="rounded-circle" src="/template2/img/users/8.jpg">
+													</div>
+													<div class="">Design team</div>
+												</div>
+												<div class="ms-auto float-end">
+													<div class="">
+														<a href="#" class="option-dots" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fe fe-more-horizontal"></i></a>
+														<div class="dropdown-menu dropdown-menu-end" style="">
+															<a class="dropdown-item" href="#">Today</a>
+															<a class="dropdown-item" href="#">Last Week</a>
+															<a class="dropdown-item" href="#">Last Month</a>
+															<a class="dropdown-item" href="#">Last Year</a>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="card-item mt-4">
+												<div class="card-item-icon bg-transparent card-icon">
+													<span class="peity-donut" data-peity='{ "fill": ["#6259ca", "rgba(204, 204, 204,0.3)"], "innerRadius": 15, "radius": 20}'>5/7</span>
+												</div>
+												<div class="card-item-body">
+													<div class="card-item-stat">
+														<small class="tx-10 text-primary font-weight-semibold">12 JUNE 2020</small>
+														<h6 class=" mt-2">Website Redesign</h6>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="card custom-card">
+									<div class="card-body">
+										<div class="d-flex">
+											<label class="main-content-label my-auto">Website Design</label>
+											<div class="ms-auto  d-flex">
+												<div class="me-3 d-flex text-muted tx-13">Running</div>
+											</div>
+										</div>
+										<div class="mt-2">
+											<div>
+												<span class="tx-15 text-muted">Task completed : 7/10</span>
+											</div>
+											<div class="container mt-2 mb-2">
+											   <canvas id="bar-chart" class="ht-180"></canvas>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col">
+												<div class="mt-4">
+													<div class="d-flex mb-2">
+														<h5 class="tx-15 my-auto text-muted font-weight-normal">Client :</h5>
+														<h5 class="tx-15 my-auto ms-3">John Deo</h5>
+													</div>
+													<div class="d-flex mb-0">
+														<h5 class="tx-13 my-auto text-muted font-weight-normal">Deadline :</h5>
+														<h5 class="tx-13 my-auto text-muted ms-2">25 Dec 2020</h5>
+													</div>
+												</div>
+											</div>
+											<div class="col col-auto">
+												<div class="mt-3">
+													<div class="">
+														<img alt="" class="ht-50" src="/template2/img/media/project-logo.png">
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div><!-- col end -->
+						</div><!-- Row end -->
 					</div>
-					<!-- end: page -->
-
-
-@section scripts{
-	
-    <!-- SweetAlerts -->
-    <script>
-		var message = '@(ViewBag.SwalMessage)';
-		if(message != ''){
-			Swal.fire({
-				icon: 'success',
-				title: message,
-				showConfirmButton: true
-			})
-		}
-	</script>
-}
+				</div>
+			</div>
+			<!-- End Main Content-->
